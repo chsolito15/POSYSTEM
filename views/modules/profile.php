@@ -69,7 +69,7 @@
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
                                                     <input type="password" class="form-control" name="currentPasswd" placeholder="Current password">
-                                                    <input type="hidden" name="currentPasswd" id="currentPasswd">
+                                                
                                                 </div>
                                             </div>
 
@@ -98,7 +98,7 @@
                                             </div>
 
                                             <div class="form-group mb-3">
-                                                <button type="submit" class="btn btn-primary">Change Password</button>
+                                                <button type="submit"  class="btn btn-primary">Change Password</button>
                                             </div>
 
                                             <?php

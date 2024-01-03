@@ -513,23 +513,25 @@ class ControllerUsers
 
 			$oldPass = $answer["password"];
 
-			$changePass = $_POST['EditPasswd'];
+			$newPasswd = $_POST['EditPasswd'];
 			$confirmPasswd = $_POST['confirmPasswd'];
-
+ 
 			if ($encryptpass === $oldPass) {
 
-				/* echo '<pre>';
+			 /* echo '<pre>';
 				var_dump($encryptpass, $oldPass);
-				echo '</pre>'; */
+				echo '</pre>'; 
+				*/
 
-				if ($changePass !== $confirmPasswd) {
+				if ($newPasswd !== $confirmPasswd) {
 
 					echo 'Your new Password not match to comfirm password';
+
 				} else {
 
-					if (preg_match('/^[a-zA-Z0-9]+$/', $changePass)) {
+					if (preg_match('/^[a-zA-Z0-9]+$/', $newPasswd)) {
 
-						$encryptpass = crypt($changePass, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+						$encryptpass = crypt($newPasswd, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
 						$data = array(
 							'password' => $encryptpass,
@@ -540,7 +542,25 @@ class ControllerUsers
 
 						if ($answer == 'ok') {
 
-							echo 'success';
+							echo '<script>
+					
+							Swal.fire({
+								type: "success",
+								icon: "success",
+								title: "Password Change Successfully",
+								showConfirmButton: true,
+								confirmButtonText: "Close"
+								 }).then(function(result){
+										
+									if (result.value) {
+		
+										window.location = "logout";
+									
+									}
+		
+								});
+							
+						</script>';
 						} else {
 
 							echo '<script>

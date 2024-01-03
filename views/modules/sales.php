@@ -22,16 +22,18 @@ if ($xml) {
 
 ?>
 
-<nav class="navbar navbar-expand-lg bg-light mb-3 p-3">
+<nav class="navbar navbar-expand-lg bg-light mb-2 p-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 
-  <h2>Sales Management</h2>
+    <div class="container">
 
-  <ul class="navbar ms-auto mb-2 mb-lg-0 list-unstyled ">
+        <h2>Sales Management</h2>
 
-    <li><a href="home" class="text-dark text-decoration-none"><i class="fa fa-home "></i> Home <i class="fas fa-angle-left"></i> </a></li>
+        <ol class="breadcrumb navbar ms-auto mb-2 mb-lg-0 list-unstyled ">
+            <li class="breadcrumb-item"><a href="home" class="text-dark text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Sales</li>
+        </ol>
 
-    <li class="active">Dashboard</li>
-  </ul>
+    </div>
 
 </nav>
 

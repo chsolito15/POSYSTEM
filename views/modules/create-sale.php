@@ -13,17 +13,19 @@ if ($_SESSION["profile"] == "special") {
 
 ?>
 
-<nav class="navbar navbar-expand-lg bg-light mb-3 p-2">
+<nav class="navbar navbar-expand-lg bg-light mb-2 p-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 
-    <h2>Sales management</h2>
+    <div class="container">
 
-    <ul class="navbar ms-auto mb-2 mb-lg-0 list-unstyled ">
+        <h2>Create Sales</h2>
 
-        <li><a href="home" class="text-dark text-decoration-none"><i class="fa fa-home "> </i> Home<i class="fas fa-angle-left"></i> </a></li>
+        <ol class="breadcrumb navbar ms-auto mb-2 mb-lg-0 list-unstyled ">
+            <li class="breadcrumb-item"><a href="home" class="text-dark text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create sale</li>
+        </ol>
 
-        <li class="active">Dashboard</li>
+    </div>
 
-    </ul>
 </nav>
 
 <div class="container">
@@ -309,8 +311,6 @@ if ($_SESSION["profile"] == "special") {
     </div>
 </div>
 
-
-
 <!--=====================================
 =            module add Customer            =
 ======================================-->
@@ -359,7 +359,7 @@ if ($_SESSION["profile"] == "special") {
                         <!--Input phone -->
                         <div class="form-group mb-4">
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon">><i class="fa fa-phone"></i></span>
+                                <span class="input-group-text" id="basic-addon"><i class="fa fa-phone"></i></span>
                                 <input class="form-control input-lg" type="text" name="newPhone" placeholder="phone" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
                             </div>
                         </div>
@@ -367,7 +367,7 @@ if ($_SESSION["profile"] == "special") {
                         <!--Input address -->
                         <div class="form-group mb-4">
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon">><i class="fa fa-map-marker"></i></span>
+                                <span class="input-group-text" id="basic-addon"><i class="fa fa-map-marker"></i></span>
                                 <input class="form-control input-lg" type="text" name="newAddress" placeholder="Address" required>
                             </div>
                         </div>
@@ -375,7 +375,7 @@ if ($_SESSION["profile"] == "special") {
                         <!--Input phone -->
                         <div class="form-group mb-4">
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon">><i class="fa fa-calendar"></i></span>
+                                <span class="input-group-text" id="basic-addon"><i class="fa fa-calendar"></i></span>
                                 <input class="form-control input-lg" type="text" name="newBirthdate" placeholder="Birth Date" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
                             </div>
                         </div>

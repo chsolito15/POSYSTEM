@@ -47,6 +47,11 @@
                             Products
                         </a>
 
+                        <a class="nav-link" href="supplier">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shipping-fast"></i></div>
+                            Supplier
+                        </a>
+
                         <a class="nav-link" href="customers">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                             Customers

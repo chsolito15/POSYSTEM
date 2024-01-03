@@ -26,9 +26,6 @@ new DataTable('.productsTable',{
 	
 });
 
-
-
-
 /*=============================================
     GETTING CATEGORY TO ASSIGN A CODE
 =============================================*/
@@ -70,8 +67,6 @@ new DataTable('.productsTable',{
 //   	})
 
 // })
-
-
 
 /*=============================================
             ADDING SELLING PRICE
@@ -146,7 +141,6 @@ $(".newImage").change(function(){
 	/*=============================================
   	WE VALIDATE THAT THE FORMAT IS JPG OR PNG
   	=============================================*/
-
 
   	if(image["type"] != "image/jpeg" && image["type"] != "image/png"){
 
