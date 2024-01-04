@@ -48,15 +48,15 @@ if ($_SESSION["profile"] == "seller") {
 
             <div class="card mb-3">
 
-                <div class="card-body" >
-                        
-                <table class="table border table-bordered table-hover table-striped dt-responsive productsTable" style="width: 100%;">
+                <div class="card-body">
+
+                    <table class="table table-bordered table-hover table-striped dt-responsive productsTable" style="width: 100%;">
 
                         <thead>
 
                             <tr>
 
-                                <th>#</th>
+                                <th style="width:10px">#</th>
                                 <th>Image</th>
                                 <th>Code</th>
                                 <th>Description</th>
@@ -293,7 +293,7 @@ if ($_SESSION["profile"] == "seller") {
               EDIT PRODUCT
 ======================================-->
 
-<div id="modalEditProduct" class="modal fade" role="dialog">
+<div id="modalEditProduct" class="modal" role="dialog">
 
     <div class="modal-dialog">
 
@@ -317,7 +317,7 @@ if ($_SESSION["profile"] == "seller") {
                 <!--=====================================
                              BODY
         ======================================-->
-             
+
                 <div class="modal-body">
 
                     <div class="box-body">

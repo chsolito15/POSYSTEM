@@ -13,7 +13,7 @@ class ControllerSupplier
 
 			if (
 				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["newSupplier"]) &&
-				preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["newAddrss"]) &&
+				preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["newAddress"]) &&
 				preg_match('/^[()\-0-9 ]+$/', $_POST["newContact"])
 
 			) {
@@ -22,12 +22,12 @@ class ControllerSupplier
 
 				$data = array(
 					"Supplier" => $_POST['newSupplier'],
-					"address" => $_POST["newAddrss"],
+					"address" => $_POST["newAddress"],
 					"contact" => $_POST["newContact"]
 
 				);
 
-				$answer = SupplierModel::mdlAddSupplier($table, $data);
+				$answer = ModelSupplier::mdlAddSupplier($table, $data);
 
 				//var_dump($answer);
 
@@ -44,7 +44,7 @@ class ControllerSupplier
 
 							}).then(function(result){
 								if (result.value) {
-									window.location = "categories";
+									window.location = "suppliers";
 								}
 							});
 						
@@ -64,7 +64,7 @@ class ControllerSupplier
 							 }).then(function(result){
 
 								if (result.value) {
-									window.location = "categories";
+									window.location = "suppliers";
 								}
 							});
 						
@@ -74,14 +74,14 @@ class ControllerSupplier
 	}
 
 	/*=============================================
-	SHOW CATEGORIES
+	SHOW Supplier
 	=============================================*/
 
 	public static function ctrShowSupplier($item, $value)
 	{
 		$table = "suppliers";
 
-		$answer = SupplierModel::mdlShowSupplier($table, $item, $value);
+		$answer = ModelSupplier::mdlShowSupplier($table, $item, $value);
 
 		return $answer;
 	}
@@ -94,16 +94,21 @@ class ControllerSupplier
 	{
 		if (isset($_POST["editSupplier"])) {
 
-			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editSupplier"])) {
+			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editSupplier"] &&
+				preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["editAddress"]) &&
+				preg_match('/^[()\-0-9 ]+$/', $_POST["editContact"])
+				)) {
 
 				$table = "suppliers";
 
 				$data = array(
 					"Supplier" => $_POST["editSupplier"],
+					"address" => $_POST['editAddress'],
+					"contact" => $_POST['editContact'],
 					"id" => $_POST["idSupplier"]
 				);
 
-				$answer = SupplierModel::mdlEditSupplier($table, $data);
+				$answer = ModelSupplier::mdlEditSupplier($table, $data);
 				// var_dump($answer);
 
 				if ($answer == "ok") {
@@ -130,7 +135,7 @@ class ControllerSupplier
 						  }).then(function(result){
 									if (result.value) {
 
-									window.location = "categories";
+									window.location = "suppliers";
 
 									}
 								})
@@ -151,7 +156,7 @@ class ControllerSupplier
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "categories";
+							window.location = "suppliers";
 
 							}
 						})
@@ -174,7 +179,7 @@ class ControllerSupplier
 
 			$data = $_GET["idSupplier"];
 
-			$answer = SupplierModel::mdlDeleteSupplier($table, $data);
+			$answer = ModelSupplier::mdlDeleteSupplier($table, $data);
 			// var_dump($answer);
 
 			if ($answer == "ok") {
@@ -202,7 +207,7 @@ class ControllerSupplier
 							
 									if (result.isConfirmed) {
 
-									window.location = "categories";
+									window.location = "suppliers";
 
 									}
 								})

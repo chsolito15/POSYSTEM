@@ -29,7 +29,9 @@ $salesTotal = ControllerProducts::ctrShowAddingOfTheSales();
 
       for ($i = 0; $i < count($products); $i++) {
 
-        echo '<li>
+        if ($products == 0) {
+
+          echo '<li>
           <div class="row">
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action">
@@ -47,6 +49,9 @@ $salesTotal = ControllerProducts::ctrShowAddingOfTheSales();
             </div>
           </div>
         </li>';
+        } else {
+          echo "";
+        }
       }
 
       ?>

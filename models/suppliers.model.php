@@ -2,10 +2,10 @@
 
 require_once "Connection.php";
 
-class SupplierModel{
+class ModelSupplier{
 
 	/*=============================================
-	CREATE CATEGORY
+	CREATE Supplier
 	=============================================*/
 
 	public static function mdlAddSupplier($table, $data){
@@ -30,7 +30,7 @@ class SupplierModel{
 	}
 	
 	/*=============================================
-	SHOW CATEGORY 
+	SHOW Supplier 
 	=============================================*/
 	
 	public static function mdlShowSupplier($table, $item, $value){
@@ -60,18 +60,18 @@ class SupplierModel{
 	}
 	
 	/*=============================================
-	EDIT CATEGORY
+	                  EDIT Supplier
 	=============================================*/
 
 	static public function mdlEditSupplier($table, $data){
 
-		$stmt = Connection::connect()->prepare("UPDATE $table SET Supplier = :Supplier WHERE id = :id");
+		$stmt = Connection::connect()->prepare("UPDATE $table SET Supplier = :Supplier, address = :address, contact = :contact WHERE id = :id");
 
-		$stmt -> bindParam(":contact", $data["contact"], PDO::PARAM_STR);
-		$stmt -> bindParam(":address", $data["address"], PDO::PARAM_STR);
-		$stmt -> bindParam(":Supplier", $data["Supplier"], PDO::PARAM_STR);
 		$stmt -> bindParam(":id", $data["id"], PDO::PARAM_INT);
-
+		$stmt -> bindParam(":Supplier", $data["Supplier"], PDO::PARAM_STR);
+		$stmt -> bindParam(":address", $data["address"], PDO::PARAM_STR);
+		$stmt -> bindParam(":contact", $data["contact"], PDO::PARAM_STR);
+		
 		if($stmt->execute()){
 
 			return "ok";
@@ -87,7 +87,7 @@ class SupplierModel{
 	}
 
 	/*=============================================
-             	DELETE CATEGORY
+             	DELETE Supplier
 	=============================================*/
 
 	static public function mdlDeleteSupplier($table, $data){

@@ -47,7 +47,7 @@
                             Products
                         </a>
 
-                        <a class="nav-link" href="supplier">
+                        <a class="nav-link" href="suppliers">
                             <div class="sb-nav-link-icon"><i class="fas fa-shipping-fast"></i></div>
                             Supplier
                         </a>

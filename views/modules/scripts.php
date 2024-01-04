@@ -5,8 +5,8 @@
 <!-- <script src="views/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="views/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
 <script src="views/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script> -->
-<script src="views/assets/js/datatables-simple-demo.js"></script>
-<script src="views/assets/js/simple-datatable.min.js"></script>
+<!-- <script src="views/assets/js/datatables-simple-demo.js"></script>
+<script src="views/assets/js/simple-datatable.min.js"></script> -->
 <script src="views/plugins/jqueryNumber/jquerynumber.min.js"></script>
 <script src="views/bower_components/moment/min/moment.min.js"></script>
 <script src="views/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -17,5 +17,3 @@
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
-<script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

@@ -23,7 +23,7 @@ session_start();
 
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
 
-    <link rel="stylesheet" href="assets/css/simple-datatables@7.1.2.min.css">
+    <!--   <link rel="stylesheet" href="assets/css/simple-datatables@7.1.2.min.css"> -->
 
     <link rel="stylesheet" href="views/assets/css/custom.css">
 
@@ -65,7 +65,7 @@ session_start();
                 $_GET["route"] == 'logout' ||
                 $_GET["route"] == 'users' ||
                 $_GET["route"] == 'categories' ||
-                $_GET["route"] == 'supplier' ||
+                $_GET["route"] == 'suppliers' ||
                 $_GET["route"] == 'products' ||
                 $_GET["route"] == 'customers' ||
                 $_GET["route"] == 'create-sale' ||
@@ -99,19 +99,19 @@ session_start();
     include 'modules/scripts.php';
 
     ?>
-
+    <script src="views/js/products.js"></script>
     <script src="views/js/sales.js"></script>
     <script src="views/js/users.js"></script>
     <script src="views/js/categories.js"></script>
-    <script src="views/js/products.js"></script>
+    <script src="views/js/suppliers.js"></script>
     <script src="views/js/customers.js"></script>
     <script src="views/js/reports.js"></script>
-    
+
     <script>
         $('.tables').DataTable({
 
             "autoWidth": false,
-           
+
         });
 
         $('.tables').on('column-sizing.dt', function(e, settings) {

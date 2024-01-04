@@ -7,7 +7,6 @@ require_once "../controllers/customers.controller.php";
 require_once "../models/customers.model.php";
 
 class productsTableSales{
-
 	/*=============================================
  	              SHOW PRODUCTS TABLE
   	=============================================*/ 
@@ -54,7 +53,6 @@ class productsTableSales{
 		  			}else{
 
 		  				$stock = "<button class='btn btn-success'>".$products[$i]["stock"]."</button>";
-
 		  			}
 
 		  			/*=============================================
