@@ -21,7 +21,7 @@ if ($_SESSION["profile"] == "seller") {
 
         <ol class="breadcrumb navbar ms-auto mb-2 mb-lg-0 list-unstyled ">
             <li class="breadcrumb-item"><a href="home" class="text-dark text-decoration-none">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            <li class="breadcrumb-item active" aria-current="page">Suppliers</li>
         </ol>
 
     </div>
@@ -200,7 +200,6 @@ $createSupplier->ctrCreateSupplier();
 =     module edit Supplier            =
 ======================================-->
 
-
 <!-- Modal -->
 <div id="editSuppliers" class="modal" tabindex="-1" aria-labelledby="..." aria-hidden="true">
     <div class="modal-dialog">
@@ -218,7 +217,7 @@ $createSupplier->ctrCreateSupplier();
                     <div class="box-body">
 
                         <!--Input name -->
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa-th"></i></span>
                                 <input class="form-control input-lg" type="text" id="editSupplier" name="editSupplier" required>
@@ -227,17 +226,17 @@ $createSupplier->ctrCreateSupplier();
                         </div>
 
                         <!--Input address -->
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-th"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
                                 <input class="form-control input-lg" type="text" id="editAddress" name="editAddress" required>
                             </div>
                         </div>
 
                         <!--Input contact -->
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-th"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i></span>
                                 <input class="form-control input-lg" type="text" id="editContact" name="editContact" required>
 
                             </div>
@@ -253,6 +252,7 @@ $createSupplier->ctrCreateSupplier();
 
                 $editSupplier = new ControllerSupplier();
                 $editSupplier->ctrEditSupplier();
+
                 ?>
             </form>
         </div>

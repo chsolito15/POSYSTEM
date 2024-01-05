@@ -17,11 +17,11 @@ if ($_SESSION["profile"] == "seller") {
 
     <div class="container">
 
-        <h2>Products Management</h2>
+        <h2>Transactions Management</h2>
 
         <ol class="breadcrumb navbar ms-auto mb-2 mb-lg-0 list-unstyled ">
             <li class="breadcrumb-item"><a href="home" class="text-dark text-decoration-none">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Products</li>
+            <li class="breadcrumb-item active" aria-current="page">Transactions</li>
         </ol>
 
     </div>
@@ -61,7 +61,7 @@ if ($_SESSION["profile"] == "seller") {
                                 <th>Code</th>
                                 <th>Description</th>
                                 <th>Category</th>
-                                <th>Stock</th>
+                                <th>New Stock</th>
                                 <th>Buying Price</th>
                                 <th>Selling Price</th>
                                 <th>Date added</th>
@@ -235,7 +235,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <div class="input-group">
 
-                                        <input type="number" class="form-control input-lg newPercentage" min="0" value="12" required>
+                                        <input type="number" class="form-control input-lg newPercentage" min="0" value="40" required>
 
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-percent"></i></span>
 
@@ -428,7 +428,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <div class="input-group">
 
-                                        <input type="number" class="form-control input-lg newPercentage" min="0" value="12" required>
+                                        <input type="number" class="form-control input-lg newPercentage" min="0" value="40" required>
 
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-percent"></i></span>
 

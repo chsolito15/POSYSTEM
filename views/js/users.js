@@ -210,12 +210,22 @@ $(document).on("click", ".btnDeleteUser", function(){
 	var username = $(this).attr("username");
 
 	Swal.fire({
+		
 		title: 'Are you sure?',
 		text: "You won't be able to revert this!",
 		icon: 'warning',
 		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		confirmButtonText: 'Yes, delete it!'
+		confirmButtonColor: '#d33',
+		confirmButtonText: 'Yes, delete it!',
+
+		showClass: {
+			backdrop: 'swal2-noanimation', // disable backdrop animation
+			popup: '',                     // disable popup animation
+			icon: ''                       // disable icon animation
+		  },
+		  hideClass: {
+			popup: '',                     // disable popup fade-out animation
+		  }
 	  }).then((result) => {
 		if (result.value) {		
            window.location = "index.php?route=users&userId="+userId+"&username="+username+"&userPhoto="+userPhoto;		  

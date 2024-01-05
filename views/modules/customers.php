@@ -56,7 +56,7 @@ if ($_SESSION["profile"] == "special") {
 
                     <div class="card-body">            
 
-                        <table class="table dt-responsive border table-bordered table-hover table-striped tables">
+                        <table class="table dt-responsive border table-bordered table-hover table-striped text-nowrap tables">
                         
                             <thead>
 
@@ -256,7 +256,7 @@ if ($_SESSION["profile"] == "special") {
         MODAL EDIT CUSTOMER
 ======================================-->
 
-    <div id="modalEditCustomer" class="modal fade" role="dialog">
+    <div id="modalEditCustomer" class="modal" role="dialog">
 
         <div class="modal-dialog">
 

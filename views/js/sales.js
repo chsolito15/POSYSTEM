@@ -738,14 +738,23 @@ $(".tables").on("click", ".btnDeleteSale", function(){
   var idSale = $(this).attr("idSale");
 
   Swal.fire({
-        title: 'Are you sure you want to delete this?',
-        text: "If you're not, you can cancel!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Cancel',
-        confirmButtonText: 'Yes, delete it!'
+	
+	title: 'Are you sure?',
+	text: "You won't be able to revert this!",
+	icon: 'warning',
+	showCancelButton: true,
+	confirmButtonColor: '#d33',
+	confirmButtonText: 'Yes, delete it!',
+
+	showClass: {
+		backdrop: 'swal2-noanimation', // disable backdrop animation
+		popup: '',                     // disable popup animation
+		icon: ''                       // disable icon animation
+	  },
+	  hideClass: {
+		popup: '',                     // disable popup fade-out animation
+	  }
+
       }).then(function(result){
         if (result.value) {
           

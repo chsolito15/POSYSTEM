@@ -46,8 +46,8 @@
                                     <th>Username</th>
                                     <th>Photo</th>
                                     <th>Profile</th>
+                                    <th>Permission</th>
                                     <th>Status</th>
-                                    <th>Last Login</th>
                                     <th>Actions</th>
 
                                 </tr>
@@ -105,9 +105,17 @@
                                     echo '<div class="bs-field-status">';
 
                                     if ($value['lastLogin'] == 1) {
-                                        echo '<img src="views/img/status/online.png" > Online';
+                                        echo '<svg height="25" width="25" xmlns="http://www.w3.org/2000/svg">
+                                             
+                                                <circle cx="12" cy="12" r="9" fill="#008000" />
+                                               
+                                                </sv> <span>Online</span>';
                                     } else {
-                                        echo '<img src="views/img/status/offline.png" > Offline';
+                                        echo '<svg height="25" width="25" xmlns="http://www.w3.org/2000/svg">
+                                             
+                                              <circle cx="12" cy="12" r="9" fill="#808080" />
+                                       
+                                                </sv> <span>Offline</span>';
                                     }
 
                                     echo '</div>';
@@ -145,7 +153,7 @@
 ======================================-->
 
     <!-- Modal -->
-    <div id="addUser" class="modal fade" role="dialog">
+    <div id="addUser" class="modal" role="dialog">
 
         <div class="modal-dialog">
 
@@ -282,7 +290,7 @@
 ======================================-->
 
     <!-- Modal -->
-    <div id="editUser" class="modal fade" role="dialog">
+    <div id="editUser" class="modal" role="dialog">
 
         <div class="modal-dialog">
 

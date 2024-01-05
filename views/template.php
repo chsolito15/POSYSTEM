@@ -72,6 +72,7 @@ session_start();
                 $_GET["route"] == 'sales' ||
                 $_GET["route"] == 'edit-sale' ||
                 $_GET["route"] == 'reports' ||
+                $_GET["route"] == 'transaction' ||
                 $_GET["route"] == 'profile'
             ) {
 

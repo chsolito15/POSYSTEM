@@ -9,7 +9,6 @@ class ControllerCustomers
 
 	public static function ctrCreateCustomer()
 	{
-
 		if (isset($_POST["newCustomer"])) {
 
 			if (
