@@ -3,9 +3,9 @@
 require_once "Connection.php";
 
 class CategoriesModel{
-	/* --LOG ON TO codeastro.com FOR MORE PROJECTS-- */
+
 	/*=============================================
-	CREATE CATEGORY
+	            CREATE CATEGORY
 	=============================================*/
 
 	public static function mdlAddCategory($table, $data){

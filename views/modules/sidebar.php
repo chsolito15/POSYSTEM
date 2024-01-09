@@ -52,9 +52,9 @@
                             Suppliers
                         </a>
 
-                        <a class="nav-link" href="transaction">
+                        <a class="nav-link" href="purchases">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
-                            Transactions
+                            Purchases
                         </a>
 
                         <a class="nav-link" href="customers">

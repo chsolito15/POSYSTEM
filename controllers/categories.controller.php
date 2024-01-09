@@ -93,6 +93,7 @@ class ControllerCategories
 				);
 
 				$answer = CategoriesModel::mdlEditCategory($table, $data);
+				
 				// var_dump($answer);
 
 				if ($answer == "ok") {

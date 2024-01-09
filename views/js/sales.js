@@ -140,7 +140,6 @@ $(".salesTable tbody").on("click", "button.addProductSale", function(){
 
 });
 
-
 /*=============================================
 WHEN TABLE LOADS EVERYTIME THAT NAVIGATE IN IT
 =============================================*/
@@ -333,7 +332,6 @@ $(".btnAddProduct").click(function(){
 
       	}
 
-
 	})
 
 })
@@ -400,6 +398,7 @@ $(".saleForm").on("change", "input.newProductQuantity", function(){
 	$(this).attr("newStock", newStock);
 
 	console.log("$(this).attr(\"stock\")", $(this).attr("stock"));
+
 	if(Number($(this).val()) > Number($(this).attr("stock"))){
 
 		/*=============================================
@@ -457,7 +456,6 @@ function addingTotalPrices(){
 	function additionArrayPrices(totalSale, numberArray){
 
 		return totalSale + numberArray;
-
 	}
 
 	var addingTotalPrice = arrayAdditionPrice.reduce(additionArrayPrices);
@@ -590,11 +588,7 @@ $("#newPaymentMethod").change(function(){
 
 	}else{
 
-		
-
 	}
-
-	
 
 })
 

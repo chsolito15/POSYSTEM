@@ -143,7 +143,7 @@ if ($_SESSION["profile"] == "seller") {
                             <div class="input-group">
 
                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa-th"></i></span>
-                                <input class="form-control input-lg" type="text" name="newSupplier" placeholder="Add Supplier" required>
+                                <input class="form-control input-lg" type="text" id="newSupplier" name="newSupplier" placeholder="Add Supplier" required>
 
                             </div>
 

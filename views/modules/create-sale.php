@@ -273,6 +273,8 @@ if ($_SESSION["profile"] == "special") {
             </div>
         </div>
 
+
+        
         <!--=============================================
       =            PRODUCTS TABLE                   =
       =============================================-->
@@ -316,7 +318,7 @@ if ($_SESSION["profile"] == "special") {
 ======================================-->
 
 <!-- Modal -->
-<div id="modalAddCustomer" class="modal fade" role="dialog">
+<div id="modalAddCustomer" class="modal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->

@@ -65,6 +65,7 @@ if ($_SESSION["profile"] == "seller") {
                                 <th>Buying Price</th>
                                 <th>Selling Price</th>
                                 <th>Date added</th>
+                            
                                 <th>Actions</th>
 
                             </tr>
@@ -87,7 +88,7 @@ if ($_SESSION["profile"] == "seller") {
 ======================================-->
 
 <!-- Modal -->
-<div id="addProduct" class="modal fade" role="dialog">
+<div id="addProduct" class="modal" role="dialog">
 
     <div class="modal-dialog">
 
@@ -122,7 +123,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa-th"></i></span>
 
-                                <select class="form-control input-lg" id="newCategory" name="newCategory">
+                                <select class="form-control input-lg" id="newCategory" name="newCategory" required>
 
                                     <option value="">Select Category</option>
 
@@ -152,7 +153,7 @@ if ($_SESSION["profile"] == "seller") {
                             <div class="input-group">
 
                                 <span class="input-group-text" id="basic-addon2"><i class="fa fa-code"></i></span>
-
+                              
                                 <input class="form-control input-lg" type="text" id="newCode" name="newCode" placeholder="Add Product Code" required>
 
                             </div>
