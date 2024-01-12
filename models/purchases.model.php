@@ -40,11 +40,11 @@ class purchasesModel{
 
 	static public function mdlAddPurchases($table, $data){
 
-		$stmt = Connection::connect()->prepare("INSERT INTO $table(idSupplier, code, description, image, stock, buyingPrice, sellingPrice) VALUES (:idSupplier, :code, :description, :image, :stock, :buyingPrice, :sellingPrice)");
+		$stmt = Connection::connect()->prepare("INSERT INTO $table(idSupplier, code, idDescription, image, stock, buyingPrice, sellingPrice) VALUES (:idSupplier, :code, :idDescription, :image, :stock, :buyingPrice, :sellingPrice)");
 
 		$stmt->bindParam(":idSupplier", $data["idSupplier"], PDO::PARAM_INT);
 		$stmt->bindParam(":code", $data["code"], PDO::PARAM_INT);
-		$stmt->bindParam(":description", $data["description"], PDO::PARAM_STR);
+		$stmt->bindParam(":idDescription", $data["idDescription"], PDO::PARAM_STR);
 		$stmt->bindParam(":image", $data["image"], PDO::PARAM_STR);
 		$stmt->bindParam(":stock", $data["stock"], PDO::PARAM_STR);
 		$stmt->bindParam(":buyingPrice", $data["buyingPrice"], PDO::PARAM_STR);
@@ -70,11 +70,11 @@ class purchasesModel{
 
 	static public function mdlEditPurchases($table, $data){
 
-		$stmt = Connection::connect()->prepare("UPDATE $table SET idSupplier = :idSupplier, description = :description, image = :image, stock = :stock, buyingPrice = :buyingPrice, sellingPrice = :sellingPrice WHERE code = :code");
+		$stmt = Connection::connect()->prepare("UPDATE $table SET idSupplier = :idSupplier, idDescription = :idDescription, image = :image, stock = :stock, buyingPrice = :buyingPrice, sellingPrice = :sellingPrice WHERE code = :code");
 
 		$stmt->bindParam(":idSupplier", $data["idSupplier"], PDO::PARAM_INT);
 		$stmt->bindParam(":code", $data["code"], PDO::PARAM_INT);
-		$stmt->bindParam(":description", $data["description"], PDO::PARAM_STR);
+		$stmt->bindParam(":idDescription", $data["idDescription"], PDO::PARAM_STR);
 		$stmt->bindParam(":image", $data["image"], PDO::PARAM_STR);
 		$stmt->bindParam(":stock", $data["stock"], PDO::PARAM_STR);
 		$stmt->bindParam(":buyingPrice", $data["buyingPrice"], PDO::PARAM_STR);
