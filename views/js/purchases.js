@@ -27,32 +27,62 @@ $('.purchaseTable').DataTable({
 
 $("#newProductDescription").on('change', function(){
 
-    $('#newPurchaseCode').val($(this).val());
+    var ProductDescription = $(this).val();
+ 
+  	var datum = new FormData();
 
-    console.log($(this).val());
-       
+   	datum.append("idProduct", ProductDescription);
+ 
+   	$.ajax({
+ 
+       url:"ajax/products.ajax.php",
+       method: "POST",
+       data: datum,
+       cache: false,
+       contentType: false,
+      processData: false,
+       dataType:"json",
+      success:function(answer){
+	   
+      // console.log("answer", answer);
+ 
+      	if(answer['code']){
+   		
+              var newCode = answer["code"];
+              $("#newPurchaseCode").val(newCode);
+ 
+       	}else{
+            var newCode = ProductDescription;
+            $("#newPurchaseCode").val(newCode);
+ 
+       	}
+				 
+       }
+ 
+  	})
 });
+
 
 
 /*=============================================
            ADDING SELLING PRICE
 =============================================*/
 
-$("#newBuyingPrice, #editBuyingPrice").change(function(){
+$("#newBuyingSupplierPrice, #editBuyingSupplierPrice").change(function(){
 
    if($(".percentage").prop("checked")){
 
        var valuePercentage = $(".newPercentage").val();
        
-       var percentage = Number(($("#newBuyingPrice").val()*valuePercentage/100))+Number($("#newBuyingPrice").val());
+       var percentage = Number(($("#newBuyingSupplierPrice").val()*valuePercentage/100))+Number($("#newBuyingSupplierPrice").val());
 
-       var editPercentage = Number(($("#editBuyingPrice").val()*valuePercentage/100))+Number($("#editBuyingPrice").val());
+       var editPercentage = Number(($("#editBuyingSupplierPrice").val()*valuePercentage/100))+Number($("#editBuyingSupplierPrice").val());
 
-       $("#newSellingPrice").val(percentage);
-       $("#newSellingPrice").prop("readonly",true);
+       $("#newSellingSupplierPrice").val(percentage);
+       $("#newSellingSupplierPrice").prop("readonly",true);
 
-       $("#editSellingPrice").val(editPercentage);
-       $("#editSellingPrice").prop("readonly",true);
+       $("#editSellingSupplierPrice").val(editPercentage);
+       $("#editSellingSupplierPrice").prop("readonly",true);
    }
 })
 
@@ -66,15 +96,15 @@ $(".newPercentage").change(function(){
 
        var valuePercentage = $(this).val();
        
-       var percentage = Number(($("#newBuyingPrice").val()*valuePercentage/100))+Number($("#newBuyingPrice").val());
+       var percentage = Number(($("#newBuyingSupplierPrice").val()* valuePercentage/100)) + Number($("#newBuyingSupplierPrice").val());
 
-       var editPercentage = Number(($("#editBuyingPrice").val()*valuePercentage/100))+Number($("#editBuyingPrice").val());
+       var editPercentage = Number(($("#editBuyingSupplierPrice").val() * valuePercentage/100)) + Number($("#editBuyingSupplierPrice").val());
 
-       $("#newSellingPrice").val(percentage);
-       $("#newSellingPrice").prop("readonly",true);
+       $("#newSellingSupplierPrice").val(percentage);
+       $("#newSellingSupplierPrice").prop("readonly",true);
 
-       $("#editSellingPrice").val(editPercentage);
-       $("#editSellingPrice").prop("readonly",true);
+       $("#editSellingSupplierPrice").val(editPercentage);
+       $("#editSellingSupplierPrice").prop("readonly",true);
 
    }
 
@@ -82,15 +112,15 @@ $(".newPercentage").change(function(){
 
 $(".percentage").on("ifUnchecked",function(){
 
-   $("#newSellingPrice").prop("readonly",false);
-   $("#editSellingPrice").prop("readonly",false);
+   $("#newSellingSupplierPrice").prop("readonly",false);
+   $("#editSellingSupplierPrice").prop("readonly",false);
 
 })
 
 $(".percentage").on("ifChecked",function(){
 
-   $("#newSellingPrice").prop("readonly",true);
-   $("#editSellingPrice").prop("readonly",true);
+   $("#newSellingSupplierPrice").prop("readonly",true);
+   $("#editSellingSupplierPrice").prop("readonly",true);
 
 })
 
@@ -158,7 +188,7 @@ $(".productsTable tbody").on("click", "button.btnEditProduct", function(){
 
     $.ajax({
 
-     url:"ajax/products.ajax.php",
+     url:"ajax/purchases.ajax.php",
      method: "POST",
      data: datum,
      cache: false,
@@ -171,7 +201,7 @@ $(".productsTable tbody").on("click", "button.btnEditProduct", function(){
          
        var categoryData = new FormData();
 
-       categoryData.append("idCategory",answer["idCategory"]);
+       categoryData.append("ProductDescription",answer["ProductDescription"]);
 
         $.ajax({
 
@@ -197,9 +227,9 @@ $(".productsTable tbody").on("click", "button.btnEditProduct", function(){
 
         $("#editStock").val(answer["stock"]);
 
-        $("#editBuyingPrice").val(answer["buyingPrice"]);
+        $("#editBuyingSupplierPrice").val(answer["buyingPrice"]);
 
-        $("#editSellingPrice").val(answer["sellingPrice"]);
+        $("#editSellingSupplierPrice").val(answer["sellingPrice"]);
 
         if(answer["image"] != ""){
 
