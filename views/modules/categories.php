@@ -48,6 +48,7 @@ if ($_SESSION["profile"] == "seller") {
                     
                         <th>#</th>
                         <th>Category</th>
+                        <th>Date Created</th>
                         <th style="width: 30%">Actions</th>
 
                     </tr>
@@ -74,6 +75,8 @@ if ($_SESSION["profile"] == "seller") {
                                 <td>' . ($key + 1) . '</td>
                                 
                                 <td class="text-uppercase">' . $value['Category'] . '</td>
+
+                                <td class="text-uppercase">' . $value['created_at'] . '</td>
 
                                 <td>
 
