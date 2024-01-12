@@ -73,7 +73,7 @@ if ($_SESSION["profile"] == "seller") {
 
                     </table>
 
-                    <input type="hidden" value="<?php echo $_SESSION['profile']; ?>" id="hiddenProfile">
+                    <input type="text" value="<?php echo $_SESSION['profile']; ?>" id="hiddenProfile">
 
                 </div>
 
@@ -115,7 +115,7 @@ if ($_SESSION["profile"] == "seller") {
 
                     <div class="box-body">
 
-                        <!-- input category -->
+                        <!-- input Supplier -->
 
                         <div class="form-group mb-3">
 
@@ -123,7 +123,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 <span class="input-group-text" id="basic-addon1"><i class="fa fa-th"></i></span>
 
-                                <select class="form-control input-lg" id="newSupplier" name="newSupplier">
+                                <select class="form-control input-lg" id="newSupplier" name="newSupplier" required>
 
                                     <option value="">Select Supplier</option>
 
@@ -132,9 +132,9 @@ if ($_SESSION["profile"] == "seller") {
                                     $item = null;
                                     $value1 = null;
 
-                                    $supplier = ControllerSupplier::ctrShowSupplier($item, $value1);
+                                    $suppliers = ControllerSupplier::ctrShowSupplier($item, $value1);
 
-                                    foreach ($supplier as $key => $value) {
+                                    foreach ($suppliers as $key => $value) {
 
                                         echo '<option value="' . $value["id"] . '">' . $value["Supplier"] . '</option>';
                                     }
@@ -154,7 +154,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 <span class="input-group-text"><i class="fa fa-code"></i></span>
 
-                                <input class="form-control input-lg" type="text" id="newPurchaseCode" name="newPurchaseCode" placeholder="Add Product Code" required readonly>
+                                <input class="form-control input-lg" type="text"  id="newPurchaseCode" name="newPurchaseCode" placeholder="Add Product Code" required readonly>
 
                             </div>
 
@@ -180,13 +180,13 @@ if ($_SESSION["profile"] == "seller") {
 
                                     $products = controllerProducts::ctrShowProducts($item2, $value2, $order);
 
-                                    foreach ($products as $key => $valueData) {
+                                    foreach ($products as $key => $value3) {
 
-                                        echo '<option value="' . $valueData["code"] . '">' . $valueData["description"] . '</option>';
+                                        echo '<option value="' . $value3["id"] . '">'. $value3["description"] . '</option>';                                       
                                     }
 
                                     ?>
-                                  
+
                                 </select>
 
                             </div>
@@ -201,7 +201,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 <span class="input-group-text" id="basic-addon4"><i class="fa fa-check"></i></span>
 
-                                <input class="form-control input-lg" type="number" id="newStock" name="newStock" placeholder="Add Stock" min="0" required>
+                                <input class="form-control input-lg" type="number" id="newSupplierStock" name="newSupplierStock" placeholder="Add Stock" min="0" required>
 
                             </div>
 
@@ -217,7 +217,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <span class="input-group-text" id="basic-addon5"><i class="fa fa-arrow-up"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="newBuyingPrice" name="newBuyingPrice" step="any" min="0" placeholder="Buying Price" required>
+                                    <input type="number" class="form-control input-lg" id="newBuyingSupplierPrice" name="newBuyingSupplierPrice" step="any" min="0" placeholder="Buying Price" required>
 
                                 </div>
 
@@ -231,7 +231,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <span class="input-group-text" id="basic-addon6"><i class="fa fa-arrow-down"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="newSellingPrice" name="newSellingPrice" step="any" min="0" placeholder="Selling Price" required>
+                                    <input type="number" class="form-control input-lg" id="newSellingSupplierPrice" name="newSellingSupplierPrice" step="any" min="0" placeholder="Selling Price" required>
 
                                 </div>
 
@@ -327,8 +327,8 @@ if ($_SESSION["profile"] == "seller") {
             <form role="form" method="post" enctype="multipart/form-data">
 
                 <!--=====================================
-                             HEADER
-        ======================================-->
+                                 HEADER
+                ======================================-->
 
                 <div class="modal-header" style="background:#DD4B39; color:white">
 
@@ -373,7 +373,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 <span class="input-group-text" id="basic-addon"><i class="fa-brands fa-product-hunt"></i></span>
 
-                                <input type="text" class="form-control input-lg" id="editDescription" name="editDescription" required>
+                                <input type="text" class="form-control input-lg" id="editProductDescription" name="editProductDescription" required>
 
                             </div>
 
@@ -386,7 +386,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 <span class="input-group-text" id="basic-addon"><i class="fa fa-check"></i></span>
 
-                                <input type="number" class="form-control input-lg" id="editStock" name="editStock" min="0" required>
+                                <input type="number" class="form-control input-lg" id="editSupplierStock" name="editSupplierStock" min="0" required>
 
                             </div>
 
@@ -401,7 +401,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <span class="input-group-text" id="basic-addon"><i class="fa fa-arrow-up"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="editBuyingPrice" name="editBuyingPrice" step="any" min="0" required>
+                                    <input type="number" class="form-control input-lg" id="editBuyingSupplierPrice" name="editBuyingSupplierPrice" step="any" min="0" required>
 
                                 </div>
 
@@ -414,7 +414,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <span class="input-group-text" id="basic-addon"><i class="fa fa-arrow-down"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="editSellingPrice" name="editSellingPrice" step="any" min="0" readonly required>
+                                    <input type="number" class="form-control input-lg" id="editSellingSupplierPrice" name="editSellingSupplierPrice" step="any" min="0" readonly required>
 
                                 </div>
 
