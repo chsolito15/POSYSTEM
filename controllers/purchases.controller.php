@@ -1,41 +1,45 @@
 <?php
 
-class controllerPurchases{
-	
+class controllerPurchases
+{
+
 	/*=============================================
-	SHOW PRODUCTS
+	                  SHOW PRODUCTS
 	=============================================*/
-	
-	public static function ctrShowPurchases($item, $value, $order){
+
+	public static function ctrShowPurchases($item, $value, $order)
+	{
 
 		$table = "purchases";
 
 		$answer = purchasesModel::mdlShowPurchases($table, $item, $value, $order);
 
 		return $answer;
-
 	}
 
 	/*=============================================
-	CREATE PRODUCTS
+	                 CREATE PRODUCTS
 	=============================================*/
 
-	static public function ctrCreatePurchases(){
+	static public function ctrCreatePurchases()
+	{
 
-		if(isset($_POST["newDescription"])){
+		if (isset($_POST["newProductDescription"])) {
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["newDescription"]) &&
-			   preg_match('/^[0-9]+$/', $_POST["newStock"]) &&	
-			   preg_match('/^[0-9.]+$/', $_POST["newBuyingPrice"]) &&
-			   preg_match('/^[0-9.]+$/', $_POST["newSellingPrice"])){
+			if (
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["newProductDescription"]) &&
+				preg_match('/^[0-9]+$/', $_POST["newSupplierStock"]) &&
+				preg_match('/^[0-9.]+$/', $_POST["newBuyingSupplierPrice"]) &&
+				preg_match('/^[0-9.]+$/', $_POST["newSellingSupplierPrice"])
+			) {
 
-		   		/*=============================================
+				/*=============================================
 			                  	VALIDATE IMAGE
 				=============================================*/
 
-			   	$route = "views/img/products/default/anonymous.png";
+				$route = "views/img/products/default/anonymous.png";
 
-			   	if(isset($_FILES["newProdPhoto"]["tmp_name"]) && $_FILES["newProdPhoto"]["error"] == 0){
+				if (isset($_FILES["newProdPhoto"]["tmp_name"]) && $_FILES["newProdPhoto"]["error"] == 0) {
 
 					list($width, $height) = getimagesize($_FILES["newProdPhoto"]["tmp_name"]);
 
@@ -43,94 +47,92 @@ class controllerPurchases{
 					$newHeight = 500;
 
 					/*=============================================
-					we create the folder to save the picture
+					   we create the folder to save the picture
 					=============================================*/
 
-					$folder = "views/img/products/".$_POST["newCode"];
+					$folder = "views/img/products/" . $_POST["newPurchaseCode"];
 
 					mkdir($folder, 0755);
-			
+
 					/*=============================================
 					WE APPLY DEFAULT PHP FUNCTIONS ACCORDING TO THE IMAGE FORMAT
 					=============================================*/
 
-					if($_FILES["newProdPhoto"]["type"] == "image/jpeg"){
+					if ($_FILES["newProdPhoto"]["type"] == "image/jpeg") {
 
 						/*=============================================
 						WE SAVE THE IMAGE IN THE FOLDER
 						=============================================*/
 
-						$random = mt_rand(100,999);
+						$random = mt_rand(100, 999);
 
-						$route = "views/img/products/".$_POST["newCode"]."/".$random.".jpg";
+						$route = "views/img/products/" . $_POST["newPurchaseCode"] . "/" . $random . ".jpg";
 
-						$origin = imagecreatefromjpeg($_FILES["newProdPhoto"]["tmp_name"]);						
+						$origin = imagecreatefromjpeg($_FILES["newProdPhoto"]["tmp_name"]);
 
 						$destiny = imagecreatetruecolor($newWidth, $newHeight);
 
 						imagecopyresized($destiny, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
 						imagejpeg($destiny, $route);
-
 					}
 
-					if($_FILES["newProdPhoto"]["type"] == "image/png"){
+					if ($_FILES["newProdPhoto"]["type"] == "image/png") {
 
 						/*=============================================
 					        	WE SAVE THE IMAGE IN THE FOLDER
 						=============================================*/
 
-						$random = mt_rand(100,999);
+						$random = mt_rand(100, 999);
 
-						$route = "views/img/products/".$_POST["newCode"]."/".$random.".png";
+						$route = "views/img/products/" . $_POST["newPurchaseCode"] . "/" . $random . ".png";
 
-						$origin = imagecreatefrompng($_FILES["newProdPhoto"]["tmp_name"]);						
+						$origin = imagecreatefrompng($_FILES["newProdPhoto"]["tmp_name"]);
 
 						$destiny = imagecreatetruecolor($newWidth, $newHeight);
 
 						imagecopyresized($destiny, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
 						imagepng($destiny, $route);
-
 					}
-
 				}
 
 				$table = "purchases";
 
-				$data = array("idSupplier" => $_POST["newSupplier"],
-							   "description" => $_POST["newDescription"],
-							   "stock" => $_POST["newStock"],
-							   "buyingPrice" => $_POST["newBuyingPrice"],
-							   "sellingPrice" => $_POST["newSellingPrice"],
-							   "image" => $route);
+				$data = array(
+					"idSupplier" => $_POST["newSupplier"],
+					"code" => $_POST["newPurchaseCode"],
+					"idDescription" => $_POST["newProductDescription"],
+					"stock" => $_POST["newSupplierStock"],
+					"buyingPrice" => $_POST["newBuyingSupplierPrice"],
+					"sellingPrice" => $_POST["newSellingSupplierPrice"],
+					"image" => $route
+				);
 
 				$answer = purchasesModel::mdlAddPurchases($table, $data);
 
-				if($answer == "ok"){
+				if ($answer == "ok") {
 
-					echo'<script>
+					echo '<script>
 
 						Swal.fire({
 							  type: "success",
-							  title: "The Product has been added successfully",
+							  title: "The new Product Purchase has been added successfully",
 							  showConfirmButton: true,
 							  confirmButtonText: "Close"
 							  }).then(function(result){
 										if (result.value) {
 
-										window.location = "products";
+										window.location = "purchases";
 
 										}
 									})
 
 						</script>';
-
 				}
+			} else {
 
-			}else{
-
-				echo'<script>
+				echo '<script>
 
 					Swal.fire({
 						  type: "error",
@@ -147,31 +149,32 @@ class controllerPurchases{
 
 			  	</script>';
 			}
-
 		}
-
 	}
-	
+
 	/*=============================================
 	                EDIT PRODUCT
 	=============================================*/
 
-	static public function ctrEditPurchases(){
+	static public function ctrEditPurchases()
+	{
 
-		if(isset($_POST["editDescription"])){
+		if (isset($_POST["editDescription"])) {
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editDescription"]) &&
-			   preg_match('/^[0-9]+$/', $_POST["editStock"]) &&	
-			   preg_match('/^[0-9.]+$/', $_POST["editBuyingPrice"]) &&
-			   preg_match('/^[0-9.]+$/', $_POST["editSellingPrice"])){
+			if (
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editDescription"]) &&
+				preg_match('/^[0-9]+$/', $_POST["editStock"]) &&
+				preg_match('/^[0-9.]+$/', $_POST["editBuyingPrice"]) &&
+				preg_match('/^[0-9.]+$/', $_POST["editSellingPrice"])
+			) {
 
-		   		/*=============================================
+				/*=============================================
 				VALIDATE IMAGE
 				=============================================*/
 
-			   	$route = $_POST["currentImage"];
+				$route = $_POST["currentImage"];
 
-			   	if(isset($_FILES["editImage"]["tmp_name"]) && !empty($_FILES["editImage"]["tmp_name"])){
+				if (isset($_FILES["editImage"]["tmp_name"]) && !empty($_FILES["editImage"]["tmp_name"])) {
 
 					list($width, $height) = getimagesize($_FILES["editImage"]["tmp_name"]);
 
@@ -182,55 +185,52 @@ class controllerPurchases{
 					WE CREATE THE FOLDER WHERE WE WILL SAVE THE PRODUCT IMAGE
 					=============================================*/
 
-					$folder = "views/img/products/".$_POST["editCode"];
+					$folder = "views/img/products/" . $_POST["editCode"];
 
 					/*=============================================
 					WE ASK IF WE HAVE ANOTHER PICTURE IN THE DB
 					=============================================*/
 
-					if(!empty($_POST["currentImage"]) && $_POST["currentImage"] != "views/img/products/default/anonymous.png"){
+					if (!empty($_POST["currentImage"]) && $_POST["currentImage"] != "views/img/products/default/anonymous.png") {
 
 						unlink($_POST["currentImage"]);
+					} else {
 
-					}else{
-
-						mkdir($folder, 0755);	
-					
+						mkdir($folder, 0755);
 					}
-					
+
 					/*=============================================
 					WE APPLY DEFAULT PHP FUNCTIONS ACCORDING TO THE IMAGE FORMAT
 					=============================================*/
 
-					if($_FILES["editImage"]["type"] == "image/jpeg"){
+					if ($_FILES["editImage"]["type"] == "image/jpeg") {
 
 						/*=============================================
 						WE SAVE THE IMAGE IN THE FOLDER
 						=============================================*/
 
-						$random = mt_rand(100,999);
+						$random = mt_rand(100, 999);
 
-						$route = "views/img/products/".$_POST["editCode"]."/".$random.".jpg";
+						$route = "views/img/products/" . $_POST["editCode"] . "/" . $random . ".jpg";
 
-						$origin = imagecreatefromjpeg($_FILES["editImage"]["tmp_name"]);						
+						$origin = imagecreatefromjpeg($_FILES["editImage"]["tmp_name"]);
 
 						$destiny = imagecreatetruecolor($newWidth, $newHeight);
 
 						imagecopyresized($destiny, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
 						imagejpeg($destiny, $route);
-
 					}
 
-					if($_FILES["editImage"]["type"] == "image/png"){
+					if ($_FILES["editImage"]["type"] == "image/png") {
 
 						/*=============================================
 					        	WE SAVE THE IMAGE IN THE FOLDER
 						=============================================*/
 
-						$random = mt_rand(100,999);
+						$random = mt_rand(100, 999);
 
-						$route = "views/img/products/".$_POST["editCode"]."/".$random.".png";
+						$route = "views/img/products/" . $_POST["editCode"] . "/" . $random . ".png";
 
 						$origin = imagecreatefrompng($_FILES["editImage"]["tmp_name"]);
 
@@ -239,25 +239,26 @@ class controllerPurchases{
 						imagecopyresized($destiny, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
 						imagepng($destiny, $route);
-
 					}
-
 				}
 
 				$table = "purchases";
 
-				$data = array("idSupplier" => $_POST["editSupplier"],
-							   "description" => $_POST["editDescription"],
-							   "stock" => $_POST["editStock"],
-							   "buyingPrice" => $_POST["editBuyingPrice"],
-							   "sellingPrice" => $_POST["editSellingPrice"],
-							   "image" => $route);
+				$data = array(
+					"idSupplier" => $_POST["editSupplier"],
+					   "code" => $_POST["editCode"],
+					"idDescription" => $_POST["editDescription"],
+					"stock" => $_POST["editStock"],
+					"buyingPrice" => $_POST["editBuyingPrice"],
+					"sellingPrice" => $_POST["editSellingPrice"],
+					"image" => $route
+				);
 
 				$answer = purchasesModel::mdlEditPurchases($table, $data);
 
-				if($answer == "ok"){
+				if ($answer == "ok") {
 
-					echo'<script>
+					echo '<script>
 
 						Swal.fire({
 							  type: "success",
@@ -273,13 +274,10 @@ class controllerPurchases{
 									})
 
 						</script>';
-
 				}
+			} else {
 
-
-			}else{
-
-				echo'<script>
+				echo '<script>
 
 					Swal.fire({
 						  type: "error",
@@ -296,35 +294,33 @@ class controllerPurchases{
 
 			  	</script>';
 			}
-
 		}
-
 	}
 
 	/*=============================================
 	              DELETE PRODUCT
 	=============================================*/
 
-	public static function ctrDeletePurchases(){
+	public static function ctrDeletePurchases()
+	{
 
-		if(isset($_GET["idPurchase"])){
+		if (isset($_GET["idPurchase"])) {
 
-			$table ="purchases";
+			$table = "purchases";
 
 			$datum = $_GET["idPurchase"];
 
-			if($_GET["image"] != "" && $_GET["image"] != "views/img/products/default/anonymous.png"){
+			if ($_GET["image"] != "" && $_GET["image"] != "views/img/products/default/anonymous.png") {
 
 				unlink($_GET["image"]);
-				rmdir('views/img/products/'.$_GET["code"]);
-
+				rmdir('views/img/products/' . $_GET["code"]);
 			}
 
 			$answer = purchasesModel::mdlDeletePurchases($table, $datum);
 
-			if($answer == "ok"){
+			if ($answer == "ok") {
 
-				echo'<script>
+				echo '<script>
 
 				Swal.fire({
 					  type: "success",
@@ -340,12 +336,7 @@ class controllerPurchases{
 							})
 
 				</script>';
-
-			}		
-		
+			}
 		}
-
 	}
-	
-
 }
