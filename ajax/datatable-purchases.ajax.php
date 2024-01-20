@@ -11,7 +11,6 @@ require_once "../models/suppliers.model.php";
 
 class purchasesTable
 {
-
 	/*=============================================
                SHOW purchase TABLE
   	=============================================*/
@@ -46,13 +45,17 @@ class purchasesTable
 			$image = "<img src='" . $purchase[$i]["image"] . "' width='40px'>";
 
 			/*=============================================
-				                	We bring the category
+				                	We bring the Supplier
 					=============================================*/
 
 			$item = 'id';
-			$value = $purchase[$i]['idSupplier'];
+			$value = $purchase[$i]['idSuppliers'];
 
 			$suppliers = ControllerSupplier::ctrShowSupplier($item, $value);
+
+			/*=============================================
+				                	We bring the Products
+					=============================================*/
 
 			$item = "id";
 			$value = $purchase[$i]['idDescription'];
@@ -64,11 +67,11 @@ class purchasesTable
 		 	 	                	ACTION BUTTONS
 		  			=============================================*/
 
-			if (isset($_GET["hiddenProfile"]) && $_GET["hiddenProfile"] == "special") {
+			if (isset($_GET["Profile"]) && $_GET["Profile"] == "special") {
 
-				$buttons =  "<div class='btn-group'><button class='btn btn-primary btnEditProduct' idPurchase='" . $purchase[$i]["id"] . "' data-bs-toggle='modal' data-bs-target='#modalEditProduct'><i class='fa fa-pencil'></i></button></div>";
+				$buttons =  "<div class='btn-group'><button class='btn btn-primary btnEditPurchase' idPurchase='" . $purchase[$i]["id"] . "' data-bs-toggle='modal' data-bs-target='#modalEditPurchase'><i class='fa fa-pencil'></i></button></div>";
 			} else {
-				$buttons =  "<div class='btn-group'><button class='btn btn-primary btnEditProduct' idPurchase='" . $purchase[$i]["id"] . "' data-bs-toggle='modal' data-bs-target='#modalEditProduct'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnDeleteProduct' idPurchase='" . $purchase[$i]["id"] . "' code='" . $purchase[$i]["code"] . "' image='" . $purchase[$i]["image"] . "'><i class='fa fa-trash'></i></button></div>";
+				$buttons =  "<div class='btn-group'><button class='btn btn-primary btnEditPurchase' idPurchase='" . $purchase[$i]["id"] . "' data-bs-toggle='modal' data-bs-target='#modalEditPurchase'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnDeletePurchase' idPurchase='" . $purchase[$i]["id"] . "' code='" . $purchase[$i]["code"] . "' image='" . $purchase[$i]["image"] . "'><i class='fa fa-trash'></i></button></div>";
 			}
 
 			$jsonData .= '[
