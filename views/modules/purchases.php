@@ -73,7 +73,7 @@ if ($_SESSION["profile"] == "seller") {
 
                     </table>
 
-                    <input type="text" value="<?php echo $_SESSION['profile']; ?>" id="hiddenProfile">
+                    <input type="text" value="<?php echo $_SESSION['profile']; ?>" id="Profile">
 
                 </div>
 
@@ -154,7 +154,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 <span class="input-group-text"><i class="fa fa-code"></i></span>
 
-                                <input class="form-control input-lg" type="text"  id="newPurchaseCode" name="newPurchaseCode" placeholder="Add Product Code" required readonly>
+                                <input class="form-control input-lg" type="text" id="newPurchaseCode" name="newPurchaseCode" placeholder="Add Product Code" required readonly>
 
                             </div>
 
@@ -182,7 +182,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     foreach ($products as $key => $value3) {
 
-                                        echo '<option value="' . $value3["id"] . '">'. $value3["description"] . '</option>';                                       
+                                        echo '<option value="' . $value3["id"] . '">' . $value3["description"] . '</option>';
                                     }
 
                                     ?>
@@ -201,7 +201,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 <span class="input-group-text" id="basic-addon4"><i class="fa fa-check"></i></span>
 
-                                <input class="form-control input-lg" type="number" id="newSupplierStock" name="newSupplierStock" placeholder="Add Stock" min="0" required>
+                                <input class="form-control input-lg" type="number" id="newPurchaseStock" name="newPurchaseStock" placeholder="Add Stock" min="0" required>
 
                             </div>
 
@@ -217,7 +217,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <span class="input-group-text" id="basic-addon5"><i class="fa fa-arrow-up"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="newBuyingSupplierPrice" name="newBuyingSupplierPrice" step="any" min="0" placeholder="Buying Price" required>
+                                    <input type="number" class="form-control input-lg" id="newBuyingPurchasePrice" name="newBuyingPurchasePrice" step="any" min="0" placeholder="Buying Price" required>
 
                                 </div>
 
@@ -231,7 +231,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <span class="input-group-text" id="basic-addon6"><i class="fa fa-arrow-down"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="newSellingSupplierPrice" name="newSellingSupplierPrice" step="any" min="0" placeholder="Selling Price" required>
+                                    <input type="number" class="form-control input-lg" id="newSellingPurchasePrice" name="newSellingPurchasePrice" step="any" min="0" placeholder="Selling Price" required>
 
                                 </div>
 
@@ -278,7 +278,7 @@ if ($_SESSION["profile"] == "seller") {
 
                             <div class="panel">Upload image</div>
 
-                            <input id="newProdPhoto" type="file" class="newImage" name="newProdPhoto">
+                            <input type="file" class="newImage" id="newProdPhoto" name="newProdPhoto">
 
                             <p class="help-block">Maximum size 2Mb</p>
 
@@ -314,11 +314,12 @@ if ($_SESSION["profile"] == "seller") {
 
 </div>
 
+
 <!--=====================================
               EDIT PRODUCT
 ======================================-->
 
-<div id="modalEditProduct" class="modal" role="dialog">
+<div id="modalEditPurchase" class="modal" role="dialog">
 
     <div class="modal-dialog">
 
@@ -336,19 +337,17 @@ if ($_SESSION["profile"] == "seller") {
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-
                 </div>
 
                 <!--=====================================
-                             BODY
-        ======================================-->
+                                  BODY
+                 ======================================-->
 
                 <div class="modal-body">
 
                     <div class="box-body">
 
                         <!-- Select Supplier -->
-
                         <div class="form-group mb-3">
 
                             <div class="input-group">
@@ -365,15 +364,32 @@ if ($_SESSION["profile"] == "seller") {
 
                         </div>
 
+                        <!--Input Code -->      
+                        <div class="form-group">
+
+                            <div class="input-group mb-3">
+
+                                <span class="input-group-text"><i class="fa fa-code"></i></span>
+
+                                <input class="form-control input-lg" type="text" id="editPurchaseCode" name="editPurchaseCode" placeholder="Add Product Code" required readonly>
+
+                            </div>
+
+                        </div>
+
                         <!-- INPUT FOR THE DESCRIPTION -->
 
                         <div class="form-group mb-3">
 
                             <div class="input-group">
 
-                                <span class="input-group-text" id="basic-addon"><i class="fa-brands fa-product-hunt"></i></span>
+                                <span class="input-group-text" id="basic-addon"><i class="fa fa-th"></i></span>
 
-                                <input type="text" class="form-control input-lg" id="editProductDescription" name="editProductDescription" required>
+                                <select class="form-control input-lg" name="editDescription" readonly required>
+
+                                    <option id="editDescription"></option>
+
+                                </select>
 
                             </div>
 
@@ -386,7 +402,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 <span class="input-group-text" id="basic-addon"><i class="fa fa-check"></i></span>
 
-                                <input type="number" class="form-control input-lg" id="editSupplierStock" name="editSupplierStock" min="0" required>
+                                <input type="number" class="form-control input-lg" id="editPurchaseStock" name="editPurchaseStock" min="0" required>
 
                             </div>
 
@@ -401,7 +417,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <span class="input-group-text" id="basic-addon"><i class="fa fa-arrow-up"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="editBuyingSupplierPrice" name="editBuyingSupplierPrice" step="any" min="0" required>
+                                    <input type="number" class="form-control input-lg" id="editBuyingPurchasePrice" name="editBuyingPurchasePrice" step="any" min="0" required>
 
                                 </div>
 
@@ -414,7 +430,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                     <span class="input-group-text" id="basic-addon"><i class="fa fa-arrow-down"></i></span>
 
-                                    <input type="number" class="form-control input-lg" id="editSellingSupplierPrice" name="editSellingSupplierPrice" step="any" min="0" readonly required>
+                                    <input type="number" class="form-control input-lg" id="editSellingPurchasePrice" name="editSellingPurchasePrice" step="any" min="0" readonly required>
 
                                 </div>
 
@@ -437,7 +453,7 @@ if ($_SESSION["profile"] == "seller") {
 
                                 </div>
 
-                                <!-- INPUT FOR PORCENTAJE -->
+                                <!-- INPUT FOR PORCENTAGE -->
                                 <div class="col-xs-6" style="padding:0">
 
                                     <div class="input-group">
@@ -457,15 +473,15 @@ if ($_SESSION["profile"] == "seller") {
                         <!-- INPUT TO UPLOAD IMAGE -->
                         <div class="form-group">
 
-                            <div class="panel">Upload Image</div>
+                            <div class="panel">Product Image</div>
 
-                            <input type="file" class="newImage" name="editImage">
+                            <!-- <input type="file" class="newImage" name="editImage" readonly> -->
 
-                            <p class="help-block">2MB max</p>
+                            <!-- <p class="help-block">2MB max</p> -->
 
-                            <img src="views/img/products/default/anonymous.png" class="img-thumbnail preview" width="50px">
+                            <img src="views/img/products/default/anonymous.png" class="img-thumbnail preview" width="100px">
 
-                            <input type="hidden" name="currentImage" id="currentImage">
+                            <input type="hidden" name="currentImage" id="currentImage" >
 
                         </div>
 
@@ -474,8 +490,8 @@ if ($_SESSION["profile"] == "seller") {
                 </div>
 
                 <!--=====================================
-                              FOOTER
-        ======================================-->
+                                 FOOTER
+                ======================================-->
 
                 <div class="modal-footer">
 
