@@ -1,25 +1,16 @@
 /*=============================================
-        LOAD DYNAMIC PRODUCTS TABLE
+        LOAD DYNAMIC PURCHASE TABLE
 =============================================*/
 
-/* $.ajax({
-
-    url: "ajax/datatable-products.ajax.php",
-    success:function(answer){	
-        console.log("answer", answer);
-    }
-}); */
-
-var hiddenProfile = $('#hiddenProfile').val();
+var Profile = $('#Profile').val();
 
 $('.purchaseTable').DataTable({
 
-   "ajax": "ajax/datatable-purchases.ajax.php?hiddenProfile="+hiddenProfile, 
+   "ajax": "ajax/datatable-purchases.ajax.php?Profile="+Profile, 
    "deferRender": true,
    "retrieve": true,
    "processing": true
 });
-
 
 /*=============================================
            ADDING PRODUCT CODE
@@ -50,11 +41,11 @@ $("#newProductDescription").on('change', function(){
    		
               var newCode = answer["code"];
               $("#newPurchaseCode").val(newCode);
+            
  
        	}else{
             var newCode = ProductDescription;
             $("#newPurchaseCode").val(newCode);
- 
        	}
 				 
        }
@@ -68,21 +59,21 @@ $("#newProductDescription").on('change', function(){
            ADDING SELLING PRICE
 =============================================*/
 
-$("#newBuyingSupplierPrice, #editBuyingSupplierPrice").change(function(){
+$("#newBuyingPurchasePrice, #editBuyingPurchasePrice").change(function(){
 
    if($(".percentage").prop("checked")){
 
        var valuePercentage = $(".newPercentage").val();
        
-       var percentage = Number(($("#newBuyingSupplierPrice").val()*valuePercentage/100))+Number($("#newBuyingSupplierPrice").val());
+       var percentage = Number(($("#newBuyingPurchasePrice").val()*valuePercentage/100))+Number($("#newBuyingPurchasePrice").val());
 
-       var editPercentage = Number(($("#editBuyingSupplierPrice").val()*valuePercentage/100))+Number($("#editBuyingSupplierPrice").val());
+       var editPercentage = Number(($("#editBuyingPurchasePrice").val()*valuePercentage/100))+Number($("#editBuyingPurchasePrice").val());
 
-       $("#newSellingSupplierPrice").val(percentage);
-       $("#newSellingSupplierPrice").prop("readonly",true);
+       $("#newSellingPurchasePrice").val(percentage);
+       $("#newSellingPurchasePrice").prop("readonly",true);
 
-       $("#editSellingSupplierPrice").val(editPercentage);
-       $("#editSellingSupplierPrice").prop("readonly",true);
+       $("#editSellingPurchasePrice").val(editPercentage);
+       $("#editSellingPurchasePrice").prop("readonly",true);
    }
 })
 
@@ -96,15 +87,15 @@ $(".newPercentage").change(function(){
 
        var valuePercentage = $(this).val();
        
-       var percentage = Number(($("#newBuyingSupplierPrice").val()* valuePercentage/100)) + Number($("#newBuyingSupplierPrice").val());
+       var percentage = Number(($("#newBuyingPurchasePrice").val()* valuePercentage/100)) + Number($("#newBuyingPurchasePrice").val());
 
-       var editPercentage = Number(($("#editBuyingSupplierPrice").val() * valuePercentage/100)) + Number($("#editBuyingSupplierPrice").val());
+       var editPercentage = Number(($("#editBuyingPurchasePrice").val() * valuePercentage/100)) + Number($("#editBuyingPurchasePrice").val());
 
-       $("#newSellingSupplierPrice").val(percentage);
-       $("#newSellingSupplierPrice").prop("readonly",true);
+       $("#newSellingPurchasePrice").val(percentage);
+       $("#newSellingPurchasePrice").prop("readonly",true);
 
-       $("#editSellingSupplierPrice").val(editPercentage);
-       $("#editSellingSupplierPrice").prop("readonly",true);
+       $("#editSellingPurchasePrice").val(editPercentage);
+       $("#editSellingPurchasePrice").prop("readonly",true);
 
    }
 
@@ -112,15 +103,15 @@ $(".newPercentage").change(function(){
 
 $(".percentage").on("ifUnchecked",function(){
 
-   $("#newSellingSupplierPrice").prop("readonly",false);
-   $("#editSellingSupplierPrice").prop("readonly",false);
+   $("#newSellingPurchasePrice").prop("readonly",false);
+   $("#editSellingPurchasePrice").prop("readonly",false);
 
 })
 
 $(".percentage").on("ifChecked",function(){
 
-   $("#newSellingSupplierPrice").prop("readonly",true);
-   $("#editSellingSupplierPrice").prop("readonly",true);
+   $("#newSellingPurchasePrice").prop("readonly",true);
+   $("#editSellingPurchasePrice").prop("readonly",true);
 
 })
 
@@ -178,7 +169,7 @@ $(".newImage").change(function(){
             EDIT PRODUCT
 =============================================*/
 
-$(".productsTable tbody").on("click", "button.btnEditProduct", function(){
+$(".purchaseTable tbody").on("click", "button.btnEditPurchase", function(){
 
    var idPurchase = $(this).attr("idPurchase");
    
@@ -197,39 +188,51 @@ $(".productsTable tbody").on("click", "button.btnEditProduct", function(){
      dataType:"json",
      success:function(answer){
        
-       // console.log("answer", answer);
-         
-       var categoryData = new FormData();
-
-       categoryData.append("ProductDescription",answer["ProductDescription"]);
+       var supplierData = new FormData();
+       supplierData.append("idSupplier",answer["idSuppliers"]);
 
         $.ajax({
 
-           url:"ajax/categories.ajax.php",
+           url:"ajax/suppliers.ajax.php",
            method: "POST",
-           data: categoryData,
+           data: supplierData,
            cache: false,
            contentType: false,
            processData: false,
            dataType:"json",
            success:function(answer){
-               
-               $("#editCategory").val(answer["id"]);
-               $("#editCategory").html(answer["Category"]);
-
+              
+               $("#editSupplier").html(answer["Supplier"]);
+                 $("#editSupplier").val(answer["id"]);
            }
+       });
 
-       })
+       var productData = new FormData();
+       productData.append("idProduct",answer["idDescription"]);
 
-        $("#editCode").val(answer["code"]);
+        $.ajax({
 
-        $("#editDescription").val(answer["description"]);
+           url:"ajax/products.ajax.php",
+           method: "POST",
+           data: productData,
+           cache: false,
+           contentType: false,
+           processData: false,
+           dataType:"json",
+           success:function(answer){
+                             
+               $("#editDescription").val(answer["id"]);
+               $("#editDescription").html(answer["description"]);
+           }
+       });
 
-        $("#editStock").val(answer["stock"]);
+        $("#editPurchaseCode").val(answer["code"]);
 
-        $("#editBuyingSupplierPrice").val(answer["buyingPrice"]);
+        $("#editPurchaseStock").val(answer["stock"]);
 
-        $("#editSellingSupplierPrice").val(answer["sellingPrice"]);
+        $("#editBuyingPurchasePrice").val(answer["buyingPrice"]);
+
+        $("#editSellingPurchasePrice").val(answer["sellingPrice"]);
 
         if(answer["image"] != ""){
 
@@ -249,7 +252,7 @@ $(".productsTable tbody").on("click", "button.btnEditProduct", function(){
                 DELETE PRODUCT
 =============================================*/
 
-$(".productsTable tbody").on("click", "button.btnDeleteProduct", function(){
+$(".purchaseTable tbody").on("click", "button.btnDeletePurchase", function(){
 
    var idPurchase = $(this).attr("idPurchase");
    var code = $(this).attr("code");
@@ -275,7 +278,7 @@ $(".productsTable tbody").on("click", "button.btnDeleteProduct", function(){
 
    }).then(function(result){
      if (result.value) {
-         window.location = "index.php?route=products&idPurchase="+idPurchase+"&image="+image+"&Code="+code;
+         window.location = "index.php?route=purchases&idPurchase="+idPurchase+"&image="+image+"&Code="+code;
      }
    })
 })
