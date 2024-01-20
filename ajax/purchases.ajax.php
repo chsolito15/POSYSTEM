@@ -9,54 +9,50 @@ require_once "../models/products.model.php";
 require_once "../controllers/suppliers.controller.php";
 require_once "../models/suppliers.model.php";
 
-require_once "../controllers/categories.controller.php";
-require_once "../models/categories.model.php";
-
 class AjaxProducts
 {
 	/*=============================================
 	      GENERATE CODE FROM ID CATEGORY
 	=============================================*/
 
-	public $idSupplier;
+	public $idSuppliers;
 
-	public function ajaxCreateProductCode()
+	public function ajaxCreatePurchasetCode()
 	{
 
-		$item = "idSupplier";
-		$value = $this->idSupplier;
+		$item = "idSuppliers";
+		$value = $this->idSuppliers;
 		$order = "id";
 
-		$answer = controllerProducts::ctrShowProducts($item, $value, $order);
+		$answer = controllerPurchases::ctrShowPurchases($item, $value, $order);
 
 		echo json_encode($answer);
 	}
 
 	/*=============================================
- 	 EDIT PRODUCT
+ 	                 EDIT PURCHASE
   	=============================================*/
 
-	public $idProduct;
-	public $getProducts;
-	public $productName;
+	public $idPurchase;
+	public $getPurchase;
+	public $purchaseName;
 
-	public function ajaxEditProduct()
+	public function ajaxEditPurchase()
 	{
-
-		if ($this->getProducts == "ok") {
+		if ($this->getPurchase == "ok") {
 
 			$item = null;
 			$value = null;
 			$order = "id";
 
-			$answer = controllerProducts::ctrShowProducts($item, $value, $order);
+			$answer = controllerPurchases::ctrShowPurchases($item, $value, $order);
 
 			echo json_encode($answer);
 
-		} else if ($this->productName != "") {
+		} else if ($this->purchaseName != "") {
 
 			$item = "description";
-			$value = $this->productName;
+			$value = $this->purchaseName;
 			$order = "id";
 
 			$answer = controllerProducts::ctrShowProducts($item, $value, $order);
@@ -65,10 +61,10 @@ class AjaxProducts
 		} else {
 
 			$item = "id";
-			$value = $this->idProduct;
+			$value = $this->idPurchase;
 			$order = "id";
 
-			$answer = controllerProducts::ctrShowProducts($item, $value, $order);
+			$answer = controllerPurchases::ctrShowPurchases($item, $value, $order);
 
 			echo json_encode($answer);
 		}
@@ -82,39 +78,50 @@ class AjaxProducts
 if (isset($_POST["idSupplier"])) {
 
 	$productCode = new AjaxProducts();
-	$productCode->idSupplier = $_POST["idSupplier"];
-	$productCode->ajaxCreateProductCode();
+	$productCode->idSuppliers = $_POST["idSupplier"];
+	$productCode->ajaxCreatePurchasetCode();
 }
 
 /*=============================================
-              EDIT PRODUCT
+     GENERATE CODE FROM ID PRODUCT
 =============================================*/
 
 if (isset($_POST["idProduct"])) {
 
+	$productCode = new AjaxProducts();
+	$productCode->idPurchase = $_POST["idProduct"];
+	$productCode->ajaxEditPurchase();
+}
+
+/*=============================================
+              EDIT PURCHASE
+=============================================*/
+
+if (isset($_POST["idPurchase"])) {
+
 	$editProduct = new AjaxProducts();
-	$editProduct->idProduct = $_POST["idProduct"];
-	$editProduct->ajaxEditProduct();
+	$editProduct->idPurchase = $_POST["idPurchase"];
+	$editProduct->ajaxEditPurchase();
 }
 
 /*=============================================
               GET PRODUCT
 =============================================*/
 
-if (isset($_POST["getProducts"])) {
+if (isset($_POST["getPurchase"])) {
 
-	$getProducts = new AjaxProducts();
-	$getProducts->getProducts = $_POST["getProducts"];
-	$getProducts->ajaxEditProduct();
+	$getPurchase = new AjaxProducts();
+	$getPurchase->getPurchase = $_POST["getPurchase"];
+	$getPurchase->ajaxEditPurchase();
 }
 
 /*=============================================
               GET PRODUCT NAME
 =============================================*/
 
-if (isset($_POST["productName"])) {
+if (isset($_POST["purchaseName"])) {
 
-	$getProducts = new AjaxProducts();
-	$getProducts->productName = $_POST["productName"];
-	$getProducts->ajaxEditProduct();
+	$getPurchase = new AjaxProducts();
+	$getPurchase->purchaseName = $_POST["purchaseName"];
+	$getPurchase->ajaxEditPurchase();
 }
