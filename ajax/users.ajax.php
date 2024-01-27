@@ -45,26 +45,6 @@ class AjaxUsers{
 	}
 
 	/*=============================================
-					LOGOUT USER
-	=============================================*/
-
-	/* public $logoutUser;
-	public $logoutId;	
-
-	public function ajaxLogoutUser(){
-
-		$table = "users";
-		$item1 = "lastLogin";
-		$value1 = $this->logoutUser;
-
-		$item2 = "id";
-		$value2 = $this->logoutId;
-
-		$ans = UsersModel::mdlUpdateUser($table, $item1, $value1, $item2, $value2);
-
-	} */
-
-	/*=============================================
 			VALIDATE IF USER ALREADY EXISTS
 	=============================================*/
 
@@ -111,7 +91,6 @@ if (isset($_POST["activateUser"])) {
 /*=============================================
      VALIDATE IF USER ALREADY EXISTS
 =============================================*/
-
 
 if (isset($_POST["validateUser"])) {
 
