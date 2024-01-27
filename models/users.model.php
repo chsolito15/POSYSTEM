@@ -4,7 +4,6 @@ require_once 'Connection.php';
 
 class UsersModel
 {
-
 	/*=============================================
 	                 SHOW USER 
 	=============================================*/
@@ -101,7 +100,25 @@ class UsersModel
 		$stmt = null;
 	}
 
-	public static function mdlEditPass($table, $data)
+	public static function mdlProfileUser($table, $data)
+	{
+		$stmt = Connection::connect()->prepare("UPDATE $table SET name = :name, photo = :photo WHERE username = :username");
+
+		$stmt->bindParam(":name",$data["name"], PDO::PARAM_STR);
+		$stmt->bindParam(":username", $data["username"], PDO::PARAM_STR);
+		$stmt->bindParam(":photo", $data["photo"], PDO::PARAM_STR);
+
+		if ($stmt->execute()) {
+
+			return 'ok';
+		} else {
+
+			return 'error';
+		}
+		$stmt = null;
+	}
+
+	public static function mdlEditProfilePass($table, $data)
 	{
 		$stmt = Connection::connect()->prepare("UPDATE $table SET password = :password WHERE id = :id");
 		
@@ -124,7 +141,6 @@ class UsersModel
 
 	public static function mdlDeleteUser($table, $data)
 	{
-
 		$stmt = Connection::connect()->prepare("DELETE FROM $table WHERE id = :id");
 
 		$stmt->bindParam(":id", $data, PDO::PARAM_STR);

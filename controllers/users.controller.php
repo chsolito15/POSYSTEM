@@ -30,8 +30,7 @@ class ControllerUsers
 							$_SESSION["loggedIn"] = "ok";
 							$_SESSION["id"] = $answer["id"];
 							$_SESSION["name"] = $answer["name"];
-							$_SESSION["username"] = $answer["username"];
-							$_SESSION["password"] = $answer["password"];
+							$_SESSION["username"] = $answer["username"];						
 							$_SESSION["photo"] = $answer["photo"];
 							$_SESSION["profile"] = $answer["profile"];
 
@@ -52,6 +51,7 @@ class ControllerUsers
 							$lastLogin = UsersModel::mdlUpdateUser($table, $item1, $value1, $item2, $value2);
 
 							if ($lastLogin == "ok") {
+								
 								echo '<script>
 
                             			window.location = "home";
@@ -284,7 +284,7 @@ class ControllerUsers
 
 				if ($_POST["EditPasswd"] != "") {
 
-					if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["EditPasswd"])) {
+					if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["EditPasswd"])){
 
 						$encryptpass = crypt($_POST["EditPasswd"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 					} else {
@@ -310,9 +310,9 @@ class ControllerUsers
 
 					$encryptpass = $_POST["currentPasswd"];
 				}
-
+			
 				$data = array(
-					'name' => $_POST["EditName"],
+					'name' =>$_POST["EditName"],
 					'username' => $_POST["EditUser"],
 					'password' => $encryptpass,
 					'profile' => $_POST["EditProfile"],
@@ -441,13 +441,12 @@ class ControllerUsers
 				$table = 'users';
 
 				$data = array(
-					'name' => $_POST["EditName"],
+					'name' => $_SESSION["name"] = $_POST["EditName"],
 					'username' => $_POST["EditUser"],
-					'profile' => $_POST["EditProfile"],
-					'photo' => $photo
+					'photo' => $_SESSION["photo"] =  $photo
 				);
 
-				$answer = UsersModel::mdlEditUser($table, $data);
+				$answer = UsersModel::mdlProfileUser($table, $data);
 
 				if ($answer == 'ok') {
 
@@ -456,7 +455,7 @@ class ControllerUsers
 						Swal.fire({
 							type: "success",
 							icon: "success",
-							title: "User edited succesfully!",
+							title: "Profile edited succesfully!",
 							showConfirmButton: true,
 							confirmButtonText: "Close"
 
@@ -496,7 +495,7 @@ class ControllerUsers
 		}
 	}
 
-	public static function crtChangePassword()
+	public static function crtProfilePassword()
 	{
 		$table = 'users';
 
@@ -517,15 +516,10 @@ class ControllerUsers
 			$confirmPasswd = $_POST['confirmPasswd'];
  
 			if ($encryptpass === $oldPass) {
-
-			 /* echo '<pre>';
-				var_dump($encryptpass, $oldPass);
-				echo '</pre>'; 
-				*/
-
+			
 				if ($newPasswd !== $confirmPasswd) {
 
-					echo 'Your new Password not match to comfirm password';
+					echo 'Your new Password does not match to comfirm password';
 
 				} else {
 
@@ -538,7 +532,7 @@ class ControllerUsers
 							'id' => $userId
 						);
 
-						$answer = UsersModel::mdlEditPass($table, $data);
+						$answer = UsersModel::mdlEditProfilePass($table, $data);
 
 						if ($answer == 'ok') {
 
@@ -593,17 +587,16 @@ class ControllerUsers
 
 
 	/*=============================================
-	DELETE USER
+					DELETE USER
 	=============================================*/
 
 	static public function ctrDeleteUser()
 	{
-
 		if (isset($_GET["userId"])) {
 
 			$table = "users";
-			$data = $_GET["userId"];
 
+			$data = $_GET["userId"];
 
 			if ($_GET["userPhoto"] != "views/img/users/default/anonymous.png") {
 
@@ -619,8 +612,8 @@ class ControllerUsers
 
 				Swal.fire({
 					type: "success",
+					icon: "success",
 					title: "The user has been succesfully deleted",
-					text: "You wont be able to revert this!",
 					showConfirmButton: true,
 					showCancelButton: true,
 					confirmButtonColor: "#3085d6",

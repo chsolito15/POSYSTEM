@@ -19,8 +19,7 @@ $(".newPics").change(function(){
 			title: "Error uploading image",
 			text: "Image has to be JPEG or PNG!",
 			icon: 'error',
-			showConfirmButton: true,
-			confirmButtonText: "Close"
+			timer: 1000
 		});
 
 	}else if(newImage["size"] > 2000000){
@@ -28,12 +27,11 @@ $(".newPics").change(function(){
 		$(".newPics").val("");
 
 		Swal.fire({
-			type: "error",
-			icon: 'error',
 			title: "Error uploading image",
 			text: "Image too big. It has to be less than 2Mb!",
-			showConfirmButton: true,
-			confirmButtonText: "Close"
+			type: "error",
+			icon: 'error',
+			timer: 1000
 		});
 
 	}else{
@@ -55,7 +53,6 @@ $(".newPics").change(function(){
 	/*=====  End of validating image format  ======*/
 	
 })
-
 
 /*=============================================
             EDITING USER PICTURE
@@ -106,7 +103,6 @@ $(document).on("click", ".btnEditUser", function(){
 
  });
 
-
 /*=============================================
                ACTIVATE USER
 =============================================*/
@@ -133,7 +129,6 @@ $(document).on("click", ".btnActivate", function(){
 			Swal.fire({
 				title: 'Your work has been saved',
 				type: "success",
-				showConfirmButton: false,
 				icon: 'success',
 				timer: 1000
 			})	
@@ -159,9 +154,8 @@ $(document).on("click", ".btnActivate", function(){
 
 });
 
-
 /*=============================================
-VALIDATE IF USER ALREADY EXISTS
+     VALIDATE IF USER ALREADY EXISTS
 =============================================*/
 
 $("#newUser").change(function(){
@@ -171,6 +165,7 @@ $("#newUser").change(function(){
 	var user = $(this).val();
 
 	var data = new FormData();
+	
  	data.append("validateUser", user);
 
   	$.ajax({
@@ -200,7 +195,7 @@ $("#newUser").change(function(){
 });
 
 /*=============================================
-DELETE USER
+               DELETE USER
 =============================================*/
 
 $(document).on("click", ".btnDeleteUser", function(){

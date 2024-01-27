@@ -106,32 +106,33 @@
 
                                     if ($value['lastLogin'] == 1) {
                                         echo '<svg height="25" width="25" xmlns="http://www.w3.org/2000/svg">
-                                             
-                                                <circle cx="12" cy="12" r="9" fill="#008000" />
-                                               
-                                                </sv> <span>Online</span>';
+                                                    
+                                                        <circle cx="12" cy="12" r="9" fill="#008000" />
+                                                    
+                                                        </sv> <span>Online</span>';
                                     } else {
                                         echo '<svg height="25" width="25" xmlns="http://www.w3.org/2000/svg">
-                                             
-                                              <circle cx="12" cy="12" r="9" fill="#808080" />
-                                       
-                                                </sv> <span>Offline</span>';
+                                                    
+                                                    <circle cx="12" cy="12" r="9" fill="#808080" />
+                                            
+                                                        </sv> <span>Offline</span>';
                                     }
 
                                     echo '</div>';
+
                                     '</td>';
 
                                     echo  '<td>
 
-                                    <div class="btn-group">
-                                    
-                                        <button class="btn btn-primary btnEditUser" idUser="' . $value["id"] . '" data-bs-toggle="modal" data-bs-target="#editUser"><i class="fa fa-pencil"></i></button>
+                                            <div class="btn-group">
+                                            
+                                                <button class="btn btn-primary btnEditUser" idUser="' . $value["id"] . '" data-bs-toggle="modal" data-bs-target="#editUser"><i class="fa fa-pencil"></i></button>
 
-                                        <button class="btn btn-danger btnDeleteUser" userId="' . $value["id"] . '" username="' . $value["username"] . '" userPhoto="' . $value["photo"] . '"><i class="fa fa-trash"></i></button>
+                                                <button class="btn btn-danger btnDeleteUser" userId="' . $value["id"] . '" username="' . $value["username"] . '" userPhoto="' . $value["photo"] . '"><i class="fa fa-trash"></i></button>
 
-                                    </div>  
+                                            </div>  
 
-                                </td>
+                                        </td>
                                    
                             </tr>';
                                 }
@@ -153,6 +154,7 @@
 ======================================-->
 
     <!-- Modal -->
+
     <div id="addUser" class="modal" role="dialog">
 
         <div class="modal-dialog">
@@ -163,8 +165,8 @@
                 <form role="form" method="POST" enctype="multipart/form-data">
 
                     <!--=====================================
-        HEADER
-        ======================================-->
+                                     HEADER
+                    ======================================-->
 
                     <div class="modal-header" style="background: #DD4B39; color: #fff">
 
@@ -175,8 +177,8 @@
                     </div>
 
                     <!--=====================================
-        BODY
-        ======================================-->
+                                     BODY
+                    ======================================-->
 
                     <div class="modal-body">
 
@@ -241,7 +243,6 @@
 
                             </div>
 
-
                             <!-- Uploading image -->
                             <div class="form-group mb-3">
 
@@ -260,8 +261,8 @@
                     </div>
 
                     <!--=====================================
-        FOOTER
-        ======================================-->
+                                     FOOTER
+                    ======================================-->
 
                     <div class="modal-footer">
 
@@ -284,10 +285,9 @@
     <!--====  End of module add user  ====-->
 
 
-
     <!--=====================================
-=            module edit user            =
-======================================-->
+    =            module edit user            =
+    ======================================-->
 
     <!-- Modal -->
     <div id="editUser" class="modal" role="dialog">
@@ -300,8 +300,8 @@
                 <form role="form" method="POST" enctype="multipart/form-data">
 
                     <!--=====================================
-        HEADER
-        ======================================-->
+                                     HEADER
+                    ======================================-->
 
                     <div class="modal-header" style="background: #DD4B39; color: #fff">
 
@@ -312,14 +312,14 @@
                     </div>
 
                     <!--=====================================
-        BODY
-        ======================================-->
+                                        BODY
+                    ======================================-->
 
                     <div class="modal-body">
 
                         <div class="box-body">
 
-                            <!--Input name -->
+                            <!-- Edit name -->
                             <div class="form-group mb-3">
 
                                 <div class="input-group">
@@ -332,7 +332,7 @@
 
                             </div>
 
-                            <!-- input username -->
+                            <!-- Edit username -->
                             <div class="form-group mb-3">
 
                                 <div class="input-group">
@@ -345,7 +345,7 @@
 
                             </div>
 
-                            <!-- input password -->
+                            <!-- Edit password -->
                             <div class="form-group mb-3">
 
                                 <div class="input-group">
@@ -360,7 +360,7 @@
 
                             </div>
 
-                            <!-- input profile -->
+                            <!-- Edit profile -->
                             <div class="form-group mb-3">
 
                                 <div class="input-group">
@@ -380,7 +380,7 @@
 
                             </div>
 
-                            <!-- Uploading image -->
+                            <!--Edit Uploading image -->
                             <div class="form-group mb-3">
 
                                 <div class="panel">Upload image</div>
@@ -400,12 +400,10 @@
                     </div>
 
                     <!--=====================================
-        FOOTER
-        ======================================-->
+                                    FOOTER
+                    ======================================-->
 
                     <div class="modal-footer">
-
-                        <!--  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button> -->
 
                         <button type="submit" class="btn btn-success">Edit User</button>
 
