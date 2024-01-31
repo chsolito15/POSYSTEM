@@ -9,6 +9,7 @@ require_once "controllers/customers.controller.php";
 require_once "controllers/sales.controller.php";
 require_once "controllers/suppliers.controller.php";
 require_once "controllers/purchases.controller.php";
+require_once "controllers/transactions.controller.php";
 
 require_once "models/users.model.php";
 require_once "models/categories.model.php";
@@ -17,6 +18,7 @@ require_once "models/customers.model.php";
 require_once "models/sales.model.php";
 require_once "models/suppliers.model.php";
 require_once "models/purchases.model.php";
+require_once "models/transactions.model.php";
 
 require_once 'extensions/vendor/autoload.php';
 
