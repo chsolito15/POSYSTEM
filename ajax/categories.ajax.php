@@ -24,7 +24,7 @@ class AjaxCategories{
 }
 
 /*=============================================
-EDITAR CATEGORÍA
+	EDIT CATEGORY
 =============================================*/	
 if(isset($_POST["idCategory"])){
 	
