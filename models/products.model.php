@@ -2,44 +2,44 @@
 
 require_once 'Connection.php';
 
-class ProductsModel{
-	
+class ProductsModel
+{
 	/*=============================================
 	              SHOWING PRODUCTS
 	=============================================*/
 
-	static public function mdlShowProducts($table, $item, $value, $order){
+	static public function mdlShowProducts($table, $item, $value, $order)
+	{
 
-		if($item != null){
+		if ($item != null) {
 
 			$stmt = Connection::connect()->prepare("SELECT * FROM $table WHERE $item = :$item ORDER BY id DESC");
 
-			$stmt -> bindParam(":".$item, $value, PDO::PARAM_STR);
+			$stmt->bindParam(":" . $item, $value, PDO::PARAM_STR);
 
-			$stmt -> execute();
+			$stmt->execute();
 
-			return $stmt -> fetch();
-
-		}else{
+			return $stmt->fetch();
+		} else {
 
 			$stmt = Connection::connect()->prepare("SELECT * FROM $table ORDER BY $order DESC");
 
-			$stmt -> execute();
+			$stmt->execute();
 
-			return $stmt -> fetchAll();
+			return $stmt->fetchAll();
 		}
-		
-		$stmt = null;
 
+		$stmt = null;
 	}
-	
+
 	/*=============================================
 	               ADDING PRODUCT
 	=============================================*/
 
-	public static function mdlAddProduct($table, $data){
+	public static function mdlAddProduct($table, $data)
+	{
 
-	$stmt = Connection::connect()->prepare("INSERT INTO $table(idCategory, code, description, image, stock, buyingPrice, sellingPrice) VALUES (:idCategory, :code, :description, :image, :stock, :buyingPrice, :sellingPrice)");
+		$stmt = Connection::connect()->prepare("INSERT INTO $table(idCategory, code, description, image, stock, buyingPrice, sellingPrice) VALUES (:idCategory, :code, :description, :image, :stock, :buyingPrice, :sellingPrice)");
 
 		$stmt->bindParam(":idCategory", $data["idCategory"], PDO::PARAM_INT);
 		$stmt->bindParam(":code", $data["code"], PDO::PARAM_STR);
@@ -49,24 +49,22 @@ class ProductsModel{
 		$stmt->bindParam(":buyingPrice", $data["buyingPrice"], PDO::PARAM_STR);
 		$stmt->bindParam(":sellingPrice", $data["sellingPrice"], PDO::PARAM_STR);
 
-		if($stmt->execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-		
 		}
-	
-		$stmt = null;
 
+		$stmt = null;
 	}
 
 	/*=============================================
 	               EDITING PRODUCT
 	=============================================*/
-	static public function mdlEditProduct($table, $data){
+	static public function mdlEditProduct($table, $data)
+	{
 
 		$stmt = Connection::connect()->prepare("UPDATE $table SET idCategory = :idCategory, description = :description, image = :image, stock = :stock, buyingPrice = :buyingPrice, sellingPrice = :sellingPrice WHERE code = :code");
 
@@ -78,79 +76,75 @@ class ProductsModel{
 		$stmt->bindParam(":buyingPrice", $data["buyingPrice"], PDO::PARAM_STR);
 		$stmt->bindParam(":sellingPrice", $data["sellingPrice"], PDO::PARAM_STR);
 
-		if($stmt->execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-		
 		}
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	             DELETING PRODUCT
 	=============================================*/
 
-	static public function mdlDeleteProduct($table, $data){
+	static public function mdlDeleteProduct($table, $data)
+	{
 
 		$stmt = Connection::connect()->prepare("DELETE FROM $table WHERE id = :id");
 
-		$stmt -> bindParam(":id", $data, PDO::PARAM_INT);
+		$stmt->bindParam(":id", $data, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-		
-		}else{
+		} else {
 
-			return "error";	
-
+			return "error";
 		}
 		$stmt = null;
-
 	}
-	
+
 	/*=============================================
 	              UPDATE PRODUCT
 	=============================================*/
 
-	static public function mdlUpdateProduct($table, $item1, $value1, $value){
+
+	static public function mdlUpdateProduct($table, $item1, $value1, $value)
+	{
 
 		$stmt = Connection::connect()->prepare("UPDATE $table SET $item1 = :$item1 WHERE id = :id");
 
-		$stmt -> bindParam(":".$item1, $value1, PDO::PARAM_STR);
-		$stmt -> bindParam(":id", $value, PDO::PARAM_STR);
+		$stmt->bindParam(":" . $item1, $value1, PDO::PARAM_STR);
+		$stmt->bindParam(":id", $value, PDO::PARAM_STR);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
-			return "ok";		
-		}else{
+			return "ok";
+		} else {
 
-			return "error";	
+			return "error";
 		}
 		$stmt = null;
-
 	}
+
 	
+
 	/*=============================================
 	         SHOW ADDING OF THE SALES
-	=============================================*/	
+	=============================================*/
 
-	static public function mdlShowAddingOfTheSales($table){
+	static public function mdlShowAddingOfTheSales($table)
+	{
 
 		$stmt = Connection::connect()->prepare("SELECT SUM(sales) as total FROM $table");
 
-		$stmt -> execute();
+		$stmt->execute();
 
-		return $stmt -> fetch();
+		return $stmt->fetch();
 
 		$stmt = null;
 	}
-
-
-	
 }

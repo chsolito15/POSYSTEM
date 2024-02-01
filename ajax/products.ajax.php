@@ -27,7 +27,7 @@ class AjaxProducts{
 	}
 
 	/*=============================================
- 	 EDIT PRODUCT
+ 				EDIT PRODUCT
   	=============================================*/ 
 
   	public $idProduct;

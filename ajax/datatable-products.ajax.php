@@ -53,7 +53,7 @@ class productsTable{
 					/*=============================================
 					                      Stock
 					=============================================*/
-				  	
+			  	
 				  	if($products[$i]["stock"] <= 10){
 
 		  				$stock = "<button class='btn btn-danger'>".$products[$i]["stock"]."</button>";
@@ -65,7 +65,6 @@ class productsTable{
 		  			}else{
 
 		  				$stock = "<button class='btn btn-success'>".$products[$i]["stock"]."</button>";
-
 		  			}
 
 		  			/*=============================================
@@ -102,7 +101,6 @@ class productsTable{
 		echo $jsonData;
 	}
 }
-
 
 /*=============================================
           ACTIVATE PRODUCTS TABLE
