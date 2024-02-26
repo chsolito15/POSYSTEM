@@ -10,7 +10,6 @@ class UsersModel
 
 	public static function MdlShowUsers($tableUsers, $item, $value)
 	{
-
 		if ($item != null) {
 
 			$stmt = Connection::connect()->prepare("SELECT * FROM $tableUsers WHERE $item = :$item");

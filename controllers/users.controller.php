@@ -3,7 +3,7 @@
 class ControllerUsers
 {
 	/*=============================================
-	USER LOGIN
+	                USER LOGIN
 	=============================================*/
 
 	public static function ctrUserLogin()
@@ -14,56 +14,46 @@ class ControllerUsers
 				preg_match('/^[a-zA-Z0-9]+$/', $_POST["loginPass"])
 
 			) {
-				$encryptpass = crypt($_POST["loginPass"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-
 				$table = 'users';
 				$item = 'username';
 				$value = $_POST["loginUser"];
 
-				$answer = UsersModel::MdlShowUsers($table, $item, $value);
+				$user = UsersModel::MdlShowUsers($table, $item, $value);
 
-				if (is_array($answer) && isset($answer["username"]) && isset($answer["password"])) {
-					if ($answer["username"] == $_POST["loginUser"] && $answer["password"] == $encryptpass) {
+				if (is_array($user) && isset($user["username"]) && isset($user["password"])) {
 
-						if ($answer["status"] == 1) {
+					if (password_verify($_POST["loginPass"], $user["password"])) {
+	
+							if ($user["status"] == 1) {
 
-							$_SESSION["loggedIn"] = "ok";
-							$_SESSION["id"] = $answer["id"];
-							$_SESSION["name"] = $answer["name"];
-							$_SESSION["username"] = $answer["username"];						
-							$_SESSION["photo"] = $answer["photo"];
-							$_SESSION["profile"] = $answer["profile"];
+								$_SESSION["loggedIn"] = "ok";
+								$_SESSION["id"] = $user["id"];
+								$_SESSION["name"] = $user["name"];
+								$_SESSION["username"] = $user["username"];
+								$_SESSION["photo"] = $user["photo"];
+								$_SESSION["profile"] = $user["profile"];
 
-							/* date_default_timezone_set('Asia/Manila');
+								$item1 = "lastLogin";
+								$value1 = 1;
+								$item2 = "id";
+								$value2 = $user["id"];
 
-							$date = date('Y-m-d');
-							$hour = date('H:i:s');
+								$lastLogin = UsersModel::mdlUpdateUser($table, $item1, $value1, $item2, $value2);
 
-							$actualDate = $date . ' ' . $hour; */
+								if ($lastLogin == "ok") {
 
-							$item1 = "lastLogin";
-
-							$value1 = 1;
-
-							$item2 = "id";
-							$value2 = $answer["id"];
-
-							$lastLogin = UsersModel::mdlUpdateUser($table, $item1, $value1, $item2, $value2);
-
-							if ($lastLogin == "ok") {
-								
-								echo '<script>
-
-                            			window.location = "home";
-
-                        		      </script>';
+									echo '<script>
+	
+											window.location = "home";
+	
+										  </script>';
+								}
+							} else {
+								echo '<div class="alert alert-danger">Your account not activated by Admin</div>';
 							}
-						} else {
-							echo '<div class="alert alert-danger">Your account not activated by Admin</div>';
+					}else{
+							echo '<div class="alert alert-danger">User or password incorrect</div>';
 						}
-					} else {
-						echo '<div class="alert alert-danger">User or password incorrect</div>';
-					}
 				} else {
 					echo '<div class="alert alert-danger">User not found</div>';
 				}
@@ -147,7 +137,7 @@ class ControllerUsers
 
 				$table = 'users';
 
-				$encryptpass = crypt($_POST["newPasswd"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+				$encryptpass = password_hash($_POST["newPasswd"], PASSWORD_DEFAULT);
 
 				$data = array(
 					'name' => $_POST["newName"],
@@ -157,16 +147,16 @@ class ControllerUsers
 					'photo' => $photo
 				);
 
-				$answer = UsersModel::mdlAddUser($table, $data);
+				$user = UsersModel::mdlAddUser($table, $data);
 
-				if ($answer == 'ok') {
+				if ($user == 'ok') {
 
 					echo '<script>
 						
 						Swal.fire({
 							type: "success",
 							icon: "success",
-							title: "User added succesfully!",
+							title: "User added Succesfully!",
 							showConfirmButton: true,
 							confirmButtonText: "Close"
 						}).then((result) => {											
@@ -202,9 +192,9 @@ class ControllerUsers
 	{
 		$table = "users";
 
-		$answer = UsersModel::MdlShowUsers($table, $item, $value);
+		$user = UsersModel::MdlShowUsers($table, $item, $value);
 
-		return $answer;
+		return $user;
 	}
 
 	/*=============================================
@@ -284,7 +274,7 @@ class ControllerUsers
 
 				if ($_POST["EditPasswd"] != "") {
 
-					if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["EditPasswd"])){
+					if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["EditPasswd"])) {
 
 						$encryptpass = crypt($_POST["EditPasswd"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 					} else {
@@ -310,18 +300,18 @@ class ControllerUsers
 
 					$encryptpass = $_POST["currentPasswd"];
 				}
-			
+
 				$data = array(
-					'name' =>$_POST["EditName"],
+					'name' => $_POST["EditName"],
 					'username' => $_POST["EditUser"],
 					'password' => $encryptpass,
 					'profile' => $_POST["EditProfile"],
 					'photo' => $photo
 				);
 
-				$answer = UsersModel::mdlEditUser($table, $data);
+				$user = UsersModel::mdlEditUser($table, $data);
 
-				if ($answer == 'ok') {
+				if ($user == 'ok') {
 
 					echo '<script>
 					
@@ -446,9 +436,9 @@ class ControllerUsers
 					'photo' => $_SESSION["photo"] =  $photo
 				);
 
-				$answer = UsersModel::mdlProfileUser($table, $data);
+				$user = UsersModel::mdlProfileUser($table, $data);
 
-				if ($answer == 'ok') {
+				if ($user == 'ok') {
 
 					echo '<script>
 					
@@ -508,19 +498,18 @@ class ControllerUsers
 
 			$encryptpass = crypt($_POST['currentPasswd'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-			$answer = UsersModel::MdlShowUsers($table, $item, $value);
+			$user = UsersModel::MdlShowUsers($table, $item, $value);
 
-			$oldPass = $answer["password"];
+			$oldPass = $user["password"];
 
 			$newPasswd = $_POST['EditPasswd'];
 			$confirmPasswd = $_POST['confirmPasswd'];
- 
+
 			if ($encryptpass === $oldPass) {
-			
+
 				if ($newPasswd !== $confirmPasswd) {
 
 					echo 'Your new Password does not match to comfirm password';
-
 				} else {
 
 					if (preg_match('/^[a-zA-Z0-9]+$/', $newPasswd)) {
@@ -532,9 +521,9 @@ class ControllerUsers
 							'id' => $userId
 						);
 
-						$answer = UsersModel::mdlEditProfilePass($table, $data);
+						$user = UsersModel::mdlEditProfilePass($table, $data);
 
-						if ($answer == 'ok') {
+						if ($user == 'ok') {
 
 							echo '<script>
 					
@@ -604,9 +593,9 @@ class ControllerUsers
 				rmdir('views/img/users/' . $_GET["username"]);
 			}
 
-			$answer = UsersModel::mdlDeleteUser($table, $data);
+			$user = UsersModel::mdlDeleteUser($table, $data);
 
-			if ($answer == "ok") {
+			if ($user == "ok") {
 
 				echo '<script>
 
